@@ -1,7 +1,6 @@
 package com.rajendra.courseapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -13,8 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.rajendra.courseapp.adapter.CategoryAdapter;
+import com.rajendra.courseapp.adapter.CoursesAdapter;
 import com.rajendra.courseapp.model.Category;
+import com.rajendra.courseapp.model.Course;
 import com.rajendra.courseapp.retrofit.ApiInterface;
 import com.rajendra.courseapp.retrofit.RetrofitClient;
 
@@ -24,12 +24,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView categoryRecyclerView;
-    CategoryAdapter categoryAdapter;
+    CoursesAdapter categoryAdapter;
 
     ApiInterface apiInterface;
 
@@ -56,27 +55,27 @@ public class MainActivity extends AppCompatActivity {
 
         categoryRecyclerView = findViewById(R.id.course_recycler);
 
-        Call<List<Category>> call = apiInterface.getAllCategory();
+        Call<List<Course>> call = apiInterface.getAllCourses();
 
-        call.enqueue(new Callback<List<Category>>() {
+        call.enqueue(new Callback<List<Course>>() {
             @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (response.isSuccessful()) {
-                    List<Category> categoryList = response.body();
-                    Log.d("Debug", "Category list size: " + categoryList.size());
+                    List<Course> categoryList = response.body();
+                    Log.d("Debug", "Course list size: " + categoryList.size());
                     if (categoryList != null) {
                         getAllCategory(categoryList);
                     } else {
-                        Toast.makeText(MainActivity.this, "Empty category list", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Empty course list", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "Failed to get category list", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Failed to get course list", Toast.LENGTH_SHORT).show();
                 }
             }
 
 
             @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
+            public void onFailure(Call<List<Course>> call, Throwable t) {
                 if (t instanceof IOException) {
                     Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
                 } else {
@@ -122,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
     // now we will setup Retrofit for network call fetching data from server.
     // lets import retrofit dependency
 
-    private void getAllCategory(List<Category> categoryList){
+    private void getAllCategory(List<Course> categoryList){
 
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, 1);
         categoryRecyclerView.setLayoutManager(layoutManager);
-        categoryAdapter = new CategoryAdapter(this, categoryList);
+        categoryAdapter = new CoursesAdapter(this, categoryList);
         categoryRecyclerView.setAdapter(categoryAdapter);
         categoryAdapter.notifyDataSetChanged();
 

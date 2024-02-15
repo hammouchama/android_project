@@ -10,21 +10,15 @@ public class Course {
     @SerializedName("courseName")
     @Expose
     private String courseName;
-    @SerializedName("rating")
+    @SerializedName("courseId")
     @Expose
-    private String rating;
-    @SerializedName("price")
+    private Long courseId;
+    @SerializedName("courseDescription")
     @Expose
-    private String price;
-    @SerializedName("bestSeller")
+    private String courseDescription;
+    @SerializedName("image")
     @Expose
-    private String bestSeller;
-    @SerializedName("member")
-    @Expose
-    private String member;
-    @SerializedName("playList")
-    @Expose
-    private List<PlayList> playList = null;
+    private String image;
 
     public String getCourseName() {
         return courseName;
@@ -34,44 +28,27 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public String getRating() {
-        return rating;
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
-    public String getPrice() {
-        return price;
+    public String getCourseDescription() {
+        return courseDescription;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
     }
 
-    public String getBestSeller() {
-        return bestSeller;
+    public String getImage() {
+        return image;
     }
 
-    public void setBestSeller(String bestSeller) {
-        this.bestSeller = bestSeller;
+    public void setImage(String image) {
+        this.image = image;
     }
-
-    public String getMember() {
-        return member;
-    }
-
-    public void setMember(String member) {
-        this.member = member;
-    }
-
-    public List<PlayList> getPlayList() {
-        return playList;
-    }
-
-    public void setPlayList(List<PlayList> playList) {
-        this.playList = playList;
-    }
-
 }

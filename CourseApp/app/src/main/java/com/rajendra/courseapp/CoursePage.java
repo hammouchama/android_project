@@ -36,7 +36,6 @@ public class CoursePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-
         setContentView(R.layout.activity_course_page);
 
         member = findViewById(R.id.members);
@@ -49,7 +48,7 @@ public class CoursePage extends AppCompatActivity {
         courseRecyclerView = findViewById(R.id.course_recycler);
 
         Call<List<Course>> call = apiInterface.getCourseContent();
-
+  /*
         call.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
@@ -85,5 +84,8 @@ public class CoursePage extends AppCompatActivity {
 
 
 
+    }
+
+   */
     }
 }

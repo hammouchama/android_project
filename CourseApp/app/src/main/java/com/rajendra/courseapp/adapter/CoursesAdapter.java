@@ -13,20 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rajendra.courseapp.CoursePage;
-import com.rajendra.courseapp.MainActivity;
 import com.rajendra.courseapp.R;
-import com.rajendra.courseapp.model.Category;
+
+import com.rajendra.courseapp.model.Course;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+import android.util.Log;
+
+
+public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CategoryViewHolder> {
 
     private Context context;
-    List<Category> categoryList;
+    List<Course> courseList;
 
-    public CategoryAdapter(Context context, List<Category> categoryList) {
+    public CoursesAdapter(Context context, List<Course> courseList) {
         this.context = context;
-        this.categoryList = categoryList;
+        this.courseList = courseList;
     }
 
     @NonNull
@@ -44,13 +47,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         // here we will bind data in recyclerview ro items.
 
-        holder.categoryName.setText(categoryList.get(position).getCategoryName());
-        holder.totalCategory.setText(categoryList.get(position).getTotalCourses());
+        holder.courseName.setText(courseList.get(position).getCourseName());
+        holder.courseDescription.setText(courseList.get(position).getCourseDescription());
+        holder.courseId.setText(courseList.get(position).getCourseId().toString());
 
-        // for image we need to add glide image fetching library from netwok
+        // for image we need to add glide image fetching library from network
 
-        Glide.with(context).load(categoryList.get(position).getImage()).into(holder.categoryImage);
-
+        Glide.with(context).load(courseList.get(position).getImage()).into(holder.courseImage);
+        Log.i("imag",courseList.get(position).getImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,20 +70,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-        return categoryList != null ? categoryList.size() : 0;
+        return courseList != null ? courseList.size() : 0;
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView categoryImage;
-        TextView categoryName, totalCategory;
+        ImageView courseImage;
+        TextView courseName,courseDescription,courseId;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            categoryImage = itemView.findViewById(R.id.course);
-            categoryName = itemView.findViewById(R.id.course_name);
-            totalCategory = itemView.findViewById(R.id.total_course);
+            courseImage = itemView.findViewById(R.id.courseImage);
+            courseName = itemView.findViewById(R.id.course_name);
+            courseDescription = itemView.findViewById(R.id.course_Description);
+            courseId=itemView.findViewById(R.id.cours_Id);
 
 
         }
