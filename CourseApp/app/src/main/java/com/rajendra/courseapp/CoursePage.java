@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rajendra.courseapp.adapter.CourseAdapter;
 import com.rajendra.courseapp.model.Category;
 import com.rajendra.courseapp.model.Course;
 import com.rajendra.courseapp.model.PlayList;
@@ -25,7 +24,7 @@ public class CoursePage extends AppCompatActivity {
 
     RecyclerView courseRecyclerView;
     ApiInterface apiInterface;
-    CourseAdapter courseAdapter;
+   // CourseAdapter courseAdapter;
 
     TextView member, rating, name, price;
 

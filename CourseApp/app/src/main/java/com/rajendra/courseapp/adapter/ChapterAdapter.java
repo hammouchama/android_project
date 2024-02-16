@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +15,12 @@ import com.rajendra.courseapp.model.PlayList;
 
 import java.util.List;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
+public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseViewHolder> {
 
     Context context;
     List<PlayList> playLists;
 
-    public CourseAdapter(Context context,  List<PlayList> playLists) {
+    public ChapterAdapter(Context context,  List<PlayList> playLists) {
         this.context = context;
         this.playLists = playLists;
     }

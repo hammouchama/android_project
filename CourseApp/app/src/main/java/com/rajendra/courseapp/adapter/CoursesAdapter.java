@@ -20,12 +20,12 @@ import com.rajendra.courseapp.model.Course;
 import java.util.List;
 
 
-public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.CategoryViewHolder> {
+public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CategoryViewHolder> {
 
     private Context context;
     List<Course> courseList;
 
-    public ChaptersAdapter(Context context, List<Course> courseList) {
+    public CoursesAdapter(Context context, List<Course> courseList) {
         this.context = context;
         this.courseList = courseList;
     }

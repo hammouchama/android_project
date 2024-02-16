@@ -40,6 +40,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/course_details.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/course_list_row_items.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -52,18 +57,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49e99dd8-2449-4e05-8882-8d0da832beb9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/controller/CourseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/model/Chapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/model/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/model/Question.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/model/Quiz.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/repository/CourseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/service/CourseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/src/main/java/net/oussa/backend/util/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -74,14 +67,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/CourseApp.app.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/CoursePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/CoursePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/adapter/CategoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/adapter/CoursesAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/model/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/retrofit/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/retrofit/ApiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/category_row_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/category_row_items.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/adapter/ChapterAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/adapter/ChapterAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/adapter/CoursesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rajendra/courseapp/adapter/CoursesAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

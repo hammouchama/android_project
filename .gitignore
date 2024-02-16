@@ -20,7 +20,10 @@ target/
 *.iws
 *.iml
 *.ipr
-
+./backend/.idea
+*.iws
+*.iml
+*.ipr
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
