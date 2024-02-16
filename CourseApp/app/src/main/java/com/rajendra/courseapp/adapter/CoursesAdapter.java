@@ -19,15 +19,13 @@ import com.rajendra.courseapp.model.Course;
 
 import java.util.List;
 
-import android.util.Log;
 
-
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CategoryViewHolder> {
+public class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.CategoryViewHolder> {
 
     private Context context;
     List<Course> courseList;
 
-    public CoursesAdapter(Context context, List<Course> courseList) {
+    public ChaptersAdapter(Context context, List<Course> courseList) {
         this.context = context;
         this.courseList = courseList;
     }
@@ -54,7 +52,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
         // for image we need to add glide image fetching library from network
 
         Glide.with(context).load(courseList.get(position).getImage()).into(holder.courseImage);
-        Log.i("imag",courseList.get(position).getImage());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
