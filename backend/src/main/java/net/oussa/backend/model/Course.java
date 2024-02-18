@@ -1,5 +1,6 @@
 package net.oussa.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Course {
     @Column(name = "course_description",columnDefinition = "TEXT",length = 5000,nullable = false)
     private String courseDescription;
 
-    @Column(nullable = false,columnDefinition = "TEXT",length = 5000)
+
     private String image;
+
 }

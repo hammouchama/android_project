@@ -24,6 +24,10 @@
             android:exported="true">
             <!-- Intent filters, etc. if applicable -->
         </activity>
+        <activity android:name=".CourseDetailsActivity"
+            android:exported="true">
+            <!-- Intent filters, etc. if applicable -->
+        </activity>
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
