@@ -25,8 +25,8 @@ public interface ApiInterface {
     Call<Void> registerUser(@Body User user);
 
     // Get the list of chapters of a course with {courseId}
-    @GET("course/{courseId}/chapters")
-    Call<List<Chapter>> getCourseChapters(Long courseId);
+    @GET("course/1/chapters")
+    Call<List<Chapter>> getCourseChapters();
 
     // we need to make model class for our data
     // first have a look on json structure.

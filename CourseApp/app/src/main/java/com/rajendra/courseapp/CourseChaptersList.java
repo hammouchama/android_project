@@ -21,6 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class CourseChaptersList extends AppCompatActivity {
     RecyclerView chaptersRecyclerView ;
     ApiInterface apiInterface;
@@ -42,7 +43,7 @@ public class CourseChaptersList extends AppCompatActivity {
 
         apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
 
-        Call<List<Chapter>> call = apiInterface.getCourseChapters(courseId);
+        Call<List<Chapter>> call = apiInterface.getCourseChapters();
         call.enqueue(new Callback<List<Chapter>>() {
             @Override
             public void onResponse(Call<List<Chapter>> call, Response<List<Chapter>> response) {

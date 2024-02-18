@@ -47,7 +47,7 @@ public class ChapterService {
     }
 
     public Chapter updateChapter(long id, Chapter updatedChapter) {
-        Optional<Chapter> optionalChapter = chapterRepository.findById(id);H
+        Optional<Chapter> optionalChapter = chapterRepository.findById(id);
 
         if (optionalChapter.isPresent()) {
             Chapter existingChapter = optionalChapter.get();

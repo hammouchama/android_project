@@ -41,6 +41,12 @@ public class CourseDetailsActivity extends AppCompatActivity {
         //load the content
         loadData();
 
+        start.setOnClickListener(v -> {
+            Intent intent = new Intent(CourseDetailsActivity.this, CourseChaptersList.class);
+            intent.putExtra("courseId", 1);
+            startActivity(intent);
+        });
+
     }
 
     // Handle back button click event

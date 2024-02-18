@@ -25,9 +25,6 @@ public class Chapter {
     @Expose
     private String description;
 
-    @SerializedName("course")
-    @Expose
-    private Course course;
 
     public Long getChapterId() {
         return chapterId;
@@ -69,11 +66,4 @@ public class Chapter {
         this.description = description;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
 }
