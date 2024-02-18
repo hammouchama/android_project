@@ -2,6 +2,8 @@ package net.oussa.backend.controller;
 
 import lombok.AllArgsConstructor;
 import net.oussa.backend.model.Course;
+import net.oussa.backend.repository.ChapterRepository;
+import net.oussa.backend.service.ChapterService;
 import net.oussa.backend.service.CourseService;
 import net.oussa.backend.util.Helper;
 import org.springframework.core.io.FileSystemResource;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class CourseController {
     CourseService courseService;
+    ChapterRepository chapterRepository;
 
     @PostMapping("/add")
     public ResponseEntity<?> addCourse(@RequestPart("image") MultipartFile image, @RequestPart("course") Course course){
@@ -75,5 +78,19 @@ public class CourseController {
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
                 .body(file);
+    }
+    // get all chapters of a course
+    @GetMapping("/{id}/chapters")
+    public ResponseEntity<?> getChapters(@PathVariable long id){
+        try {
+            Course course = (Course) courseService.getCourse(id).getBody();
+            if (course != null){
+                return ResponseEntity.ok(chapterRepository.findByCourse(course));
+            }
+            return new ResponseEntity<>("Course not found",HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  new ResponseEntity<>("something was wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

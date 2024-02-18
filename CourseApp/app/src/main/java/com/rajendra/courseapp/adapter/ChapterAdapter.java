@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rajendra.courseapp.R;
+import com.rajendra.courseapp.model.Chapter;
 import com.rajendra.courseapp.model.PlayList;
 
 import java.util.List;
@@ -18,50 +19,36 @@ import java.util.List;
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseViewHolder> {
 
     Context context;
-    List<PlayList> playLists;
+    List<Chapter> chapterList;
 
-    public ChapterAdapter(Context context,  List<PlayList> playLists) {
+    public ChapterAdapter(Context context, List<Chapter> chapterList) {
         this.context = context;
-        this.playLists = playLists;
+        this.chapterList = chapterList;
     }
 
     @NonNull
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.course_list_row_items, parent, false);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_course_chapters_list, parent, false);
         return new CourseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-
-        int i=position+1;
-        holder.contentNumber.setText("0"+i);
-        holder.contentTime.setText(playLists.get(position).getTime());
-        holder.contentName.setText(playLists.get(position).getName());
-
+        holder.chapterName.setText(chapterList.get(position).getChapterName());
     }
 
     @Override
     public int getItemCount() {
-        return playLists.size();
+        return chapterList.size();
     }
 
-
-    public static class CourseViewHolder extends RecyclerView.ViewHolder{
-
-
-        TextView contentNumber, contentTime, contentName;
+    public class CourseViewHolder extends RecyclerView.ViewHolder {
+        TextView chapterName;
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            contentName = itemView.findViewById(R.id.content_title);
-            contentTime = itemView.findViewById(R.id.content_time);
-            contentNumber = itemView.findViewById(R.id.content_number);
-
+            chapterName = itemView.findViewById(R.id.chapter_name);
         }
     }
-
 }

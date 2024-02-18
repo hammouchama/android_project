@@ -1,6 +1,7 @@
 package com.rajendra.courseapp.retrofit;
 
 import com.rajendra.courseapp.model.Category;
+import com.rajendra.courseapp.model.Chapter;
 import com.rajendra.courseapp.model.Course;
 import com.rajendra.courseapp.model.User;
 
@@ -22,6 +23,10 @@ public interface ApiInterface {
     Call<User> loginUser(@Body User user);
     @POST("user/register")
     Call<Void> registerUser(@Body User user);
+
+    // Get the list of chapters of a course with {courseId}
+    @GET("course/{courseId}/chapters")
+    Call<List<Chapter>> getCourseChapters(Long courseId);
 
     // we need to make model class for our data
     // first have a look on json structure.

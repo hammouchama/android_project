@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="@+id/content_number" />
 
     <TextView
-        android:id="@+id/content_title"
+        android:id="@+id/chapter_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_semibold"

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,5 +88,16 @@ public class CoursePage extends AppCompatActivity {
     }
 
    */
+
+        // on click on the button id/textView6 it should go to the next activity which is CourseChaptersList activity
+        TextView button = findViewById(R.id.textView6);
+        button.setOnClickListener(v -> {
+            // start the CourseChaptersList activity and pass the courseId to it, the courseId depends on the course clicked
+            Intent intent = new Intent(CoursePage.this, CourseChaptersList.class);
+            intent.putExtra("courseId",1l);
+            startActivity(intent);
+        });
+
+
     }
 }

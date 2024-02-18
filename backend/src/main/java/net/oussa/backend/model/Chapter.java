@@ -17,9 +17,6 @@ public class Chapter {
     @Column(name = "chapter_name", nullable = false)
     private String chapterName;
 
-    @Column(name = "is_locked", columnDefinition = "INTEGER DEFAULT 0")
-    private int isLocked;
-
     @Column(name = "video_url")
     private String videoUrl;
 
