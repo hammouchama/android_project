@@ -107,7 +107,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # JetBrains
-.idea/
+.idea
 
 # User-specific files
 *.suo
@@ -135,7 +135,7 @@ $RECYCLE.BIN/
 .classpath
 
 # Gradle
-.gradle/
+.gradle
 build/
 
 # Spring Boot
