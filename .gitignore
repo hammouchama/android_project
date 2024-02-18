@@ -144,5 +144,8 @@ target
 !src/test
 src/test/resources/application-test.yml
 CourseApp/.gradle
+CourseApp/.gradle/
 CourseApp/.gradle/*
 CourseApp/.gradle/**
+CourseApp/.idea/
+CourseApp/.idea/**
