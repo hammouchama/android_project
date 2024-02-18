@@ -21,11 +21,12 @@
 
             <ImageView
                 android:id="@+id/courseImage"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="150dp"
+                android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/business" />
+                android:src="@drawable/business"
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/course_name"
@@ -39,33 +40,6 @@
                 android:textColor="@color/lavender"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/course_Description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/course_name"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/nunito"
-                android:text="17"
-                android:textColor="@color/lavender"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:id="@+id/cours_Id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/course_Description"
-                android:layout_marginStart="2dp"
-                android:layout_toEndOf="@+id/course_Description"
-                android:fontFamily="@font/nunito"
-                android:text="Courses"
-                android:textColor="@color/lavender"
-                android:textSize="14sp"
-                android:visibility="invisible"
-
-                />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

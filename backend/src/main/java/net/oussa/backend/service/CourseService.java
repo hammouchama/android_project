@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,7 +54,8 @@ public class CourseService {
 
     public ResponseEntity<?> getAllCourses() {
         try {
-            return new ResponseEntity<>(courseRepository.findAll(),HttpStatus.OK);
+            List<Course> courses=courseRepository.findAll();
+            return new ResponseEntity<>(courses,HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -68,7 +71,9 @@ public class CourseService {
                 newCourse.setCourseId(id);
                 newCourse.setCourseDescription(course.getCourseDescription());
                 newCourse.setCourseName(course.getCourseName());
-                newCourse.setImage( Helper.saveImage(image,serverAddress));
+                if(!image.isEmpty()){
+                    newCourse.setImage(Helper.saveImage(image,serverAddress));
+                }
                 return new ResponseEntity<>(courseRepository.save(newCourse),HttpStatus.OK);
             }
             return new ResponseEntity<>("Course not fond",HttpStatus.BAD_REQUEST);

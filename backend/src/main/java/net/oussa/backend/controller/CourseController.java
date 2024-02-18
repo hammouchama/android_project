@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/course")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class CourseController {
     CourseService courseService;
     ChapterRepository chapterRepository;
@@ -68,16 +69,23 @@ public class CourseController {
         return  new ResponseEntity<>("something was wrong", HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
+    @CrossOrigin("*")
     @GetMapping("/images/{id}")
     public ResponseEntity<?> getImage(@PathVariable String id) {
-        String path = "src/main/resources/static/images/" + id ;
+        String path = "src/main/resources/static/images/" + id;
         FileSystemResource file = new FileSystemResource(path);
         if (!file.exists()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_PNG)
-                .body(file);
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_PNG)
+                    .body(file);
+        } catch (Exception e) {
+            // Log the exception for debugging
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving the image.");
+        }
     }
     // get all chapters of a course
     @GetMapping("/{id}/chapters")
