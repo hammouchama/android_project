@@ -1,27 +1,40 @@
 package net.oussa.backend.service;
 
 
+import lombok.AllArgsConstructor;
 import net.oussa.backend.model.Chapter;
+import net.oussa.backend.model.Course;
 import net.oussa.backend.repository.ChapterRepository;
+import net.oussa.backend.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ChapterService {
 
-    private final ChapterRepository chapterRepository;
+    private  ChapterRepository chapterRepository;
+    private CourseRepository courseRepository;
 
-    @Autowired
-    public ChapterService(ChapterRepository chapterRepository) {
-        this.chapterRepository = chapterRepository;
-    }
 
-    public Chapter addChapter(Chapter chapter) {
+    public ResponseEntity<?> addChapter(Chapter chapter, long courseId) {
         // Add logic for validating and saving the chapter to the database
-        return chapterRepository.save(chapter);
+        try {
+            Optional<Course> course = courseRepository.findById(courseId);
+            if (course.isPresent()){
+                chapter.setCourse(course.get());
+                return  new ResponseEntity<>(chapterRepository.save(chapter),HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>("Course not found",HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("something was wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public Chapter getChapter(long id) {
@@ -34,7 +47,7 @@ public class ChapterService {
     }
 
     public Chapter updateChapter(long id, Chapter updatedChapter) {
-        Optional<Chapter> optionalChapter = chapterRepository.findById(id);
+        Optional<Chapter> optionalChapter = chapterRepository.findById(id);H
 
         if (optionalChapter.isPresent()) {
             Chapter existingChapter = optionalChapter.get();
@@ -52,5 +65,18 @@ public class ChapterService {
 
     public void deleteChapter(long id) {
         chapterRepository.deleteById(id);
+    }
+
+    public ResponseEntity<?> getChapterByCourseId(long id) {
+        try {
+            Optional<Course> courseById = courseRepository.findById(id);
+            if (courseById.isPresent()){
+                return new ResponseEntity<>(chapterRepository.findChapterByCourse(courseById.get()),HttpStatus.OK);
+            }
+            return new ResponseEntity<>("course not found",HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  new ResponseEntity<>("something was wrong ",HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

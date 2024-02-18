@@ -1,7 +1,11 @@
 package net.oussa.backend.service;
 
+import lombok.AllArgsConstructor;
+import net.oussa.backend.model.Chapter;
 import net.oussa.backend.model.Quiz;
+import net.oussa.backend.repository.ChapterRepository;
 import net.oussa.backend.repository.QuizRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -9,19 +13,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class QuizService {
 
-    private final QuizRepository quizRepository;
-
-    public QuizService(QuizRepository quizRepository) {
-        this.quizRepository = quizRepository;
-    }
-
-    public ResponseEntity<?> addQuiz(Quiz quiz) {
+    private  QuizRepository quizRepository;
+    private ChapterRepository chapterRepository;
+    public ResponseEntity<?> addQuiz(Quiz quiz, long chapterId) {
         try {
-            // Implement logic to add a new quiz to the database
-            quizRepository.save(quiz);
-            return ResponseEntity.ok("Quiz added successfully");
+            Optional<Chapter> chapter = chapterRepository.findById(chapterId);
+            if (chapter.isPresent()){
+                quiz.setChapter(chapter.get());
+                quizRepository.save(quiz);
+                return ResponseEntity.ok("Quiz added successfully");
+            }
+            return  new ResponseEntity<>("Chapter not found", HttpStatus.BAD_REQUEST);
+
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to add quiz");

@@ -3,6 +3,7 @@ package net.oussa.backend.controller;
 import lombok.AllArgsConstructor;
 import net.oussa.backend.model.Chapter;
 import net.oussa.backend.service.ChapterService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,11 @@ public class ChapterController {
 
     private final ChapterService chapterService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addChapter(@RequestBody Chapter chapter) {
+    @PostMapping("/add/{courseId}")
+    public ResponseEntity<?> addChapter(@RequestBody Chapter chapter,@PathVariable long courseId) {
         try {
-            Chapter addedChapter = chapterService.addChapter(chapter);
-            return ResponseEntity.ok(addedChapter);
+            return chapterService.addChapter(chapter,courseId);
+
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Internal Server Error");
@@ -50,7 +51,7 @@ public class ChapterController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateChapter(@PathVariable long id, @RequestPart("chapter") Chapter chapter) {
+    public ResponseEntity<?> updateChapter(@PathVariable long id, @RequestBody Chapter chapter) {
         try {
             Chapter updatedChapter = chapterService.updateChapter(id, chapter);
             return ResponseEntity.ok(updatedChapter);
@@ -70,4 +71,5 @@ public class ChapterController {
             return ResponseEntity.status(500).body("Internal Server Error");
         }
     }
+
 }

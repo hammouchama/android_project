@@ -15,10 +15,10 @@ public class QuizController {
 
     private final QuizService quizService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addQuiz(@RequestBody Quiz quiz) {
+    @PostMapping("/add/{chapterId}")
+    public ResponseEntity<?> addQuiz(@RequestBody Quiz quiz,@PathVariable long chapterId) {
         try {
-            return quizService.addQuiz(quiz);
+            return quizService.addQuiz(quiz,chapterId);
         } catch (Exception e) {
             e.printStackTrace();
         }

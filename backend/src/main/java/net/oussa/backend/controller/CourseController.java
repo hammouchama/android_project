@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @CrossOrigin("*")
 public class CourseController {
     CourseService courseService;
-    ChapterRepository chapterRepository;
+    ChapterService chapterService;
 
     @PostMapping("/add")
     public ResponseEntity<?> addCourse(@RequestPart("image") MultipartFile image, @RequestPart("course") Course course){
@@ -91,11 +91,7 @@ public class CourseController {
     @GetMapping("/{id}/chapters")
     public ResponseEntity<?> getChapters(@PathVariable long id){
         try {
-            Course course = (Course) courseService.getCourse(id).getBody();
-            if (course != null){
-                return ResponseEntity.ok(chapterRepository.findByCourse(course));
-            }
-            return new ResponseEntity<>("Course not found",HttpStatus.BAD_REQUEST);
+                return chapterService.getChapterByCourseId(id);
         }catch (Exception e){
             e.printStackTrace();
         }

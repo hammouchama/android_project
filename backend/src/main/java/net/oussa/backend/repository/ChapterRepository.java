@@ -13,5 +13,5 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
     Chapter findByChapterName(String chapterName);
 
     // Custom query to find chapters by course
-    List<Chapter> findByCourse(Course course);
+    List<Chapter> findChapterByCourse(Course course);
 }
