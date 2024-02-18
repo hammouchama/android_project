@@ -143,3 +143,4 @@ target/
 !src/main/
 !src/test/
 src/test/resources/application-test.yml
+CourseApp/.gradle/
