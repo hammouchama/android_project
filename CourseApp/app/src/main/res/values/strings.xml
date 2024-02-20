@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CourseApp</string>
+    <string name="let_s_start_learning">Let\'s Start Learning!</string>
+    <string name="search_for_courses">Search for courses</string>
+    <string name="choice_your_courses">Choice your courses</string>
 </resources>
