@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
 
                 // Redirect to LoginActivity
-                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
                 startActivity(loginIntent);
 
                 // Optional: Finish the current activity to prevent returning to it on back press

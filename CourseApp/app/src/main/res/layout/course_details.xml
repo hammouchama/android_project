@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:background="@drawable/lavender_border"
+                    android:background="@drawable/white_background"
                     android:layout_margin="10dp">
                 <TextView
                     android:id="@+id/course_title"

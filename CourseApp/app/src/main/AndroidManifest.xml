@@ -15,17 +15,19 @@
         >
 
         <activity android:name=".CoursePage"
-            android:exported="true"></activity>
+            android:exported="false"/>
+        <activity android:name=".WelcomeActivity"
+            android:exported="false"/>
         <activity android:name=".LoginActivity"
-            android:exported="true">
+           >
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity android:name=".SignupActivity"
-            android:exported="true">
+            >
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity android:name=".CourseDetailsActivity"
-            android:exported="true">
+            >
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity android:name=".MainActivity"
