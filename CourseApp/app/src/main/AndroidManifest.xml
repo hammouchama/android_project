@@ -12,34 +12,24 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name="com.OM.EdJourney.CoursePage"
-            android:exported="true">
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
+    >
+
+        <activity android:name=".CoursePage"
+            android:exported="false" />
+        <activity android:name=".WelcomeActivity"
+            android:exported="false" />
+        <activity android:name=".LoginActivity"
+        >
             <!-- Intent filters, etc. if applicable -->
         </activity>
-        <activity
-            android:name="com.OM.EdJourney.LoginActivity"
-            android:exported="true">
-
+        <activity android:name=".SignupActivity"
+        >
             <!-- Intent filters, etc. if applicable -->
         </activity>
-        <activity
-            android:name="com.OM.EdJourney.SignupActivity"
-            android:exported="true">
-
-            <!-- Intent filters, etc. if applicable -->
-        </activity>
-
-        <activity
-            android:name="com.OM.EdJourney.CourseChaptersList"
-            android:exported="true">
-
-            <!-- Intent filters, etc. if applicable -->
-        </activity>
-        <activity
-            android:name="com.OM.EdJourney.CourseDetailsActivity"
-            android:exported="true">
+        <activity android:name=".CourseDetailsActivity"
+        >
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
