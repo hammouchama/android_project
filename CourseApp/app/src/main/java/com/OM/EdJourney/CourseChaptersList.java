@@ -1,19 +1,16 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rajendra.courseapp.adapter.ChapterAdapter;
-import com.rajendra.courseapp.model.Chapter;
-import com.rajendra.courseapp.model.Course;
-import com.rajendra.courseapp.model.PlayList;
-import com.rajendra.courseapp.retrofit.ApiInterface;
-import com.rajendra.courseapp.retrofit.RetrofitClient;
+import com.OM.EdJourney.adapter.ChapterAdapter;
+import com.OM.EdJourney.model.Chapter;
+import com.OM.EdJourney.retrofit.ApiInterface;
+import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import java.util.List;
 

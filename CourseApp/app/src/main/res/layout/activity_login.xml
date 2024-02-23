@@ -43,6 +43,8 @@
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
                 android:hint="Username"
+                android:saveEnabled="true"
+                android:lineBreakStyle="none"
                 android:drawableLeft="@drawable/ic_baseline_person_pin_24"
                 android:drawablePadding="8dp"
                 android:textColor="@color/grey"/>
@@ -56,7 +58,12 @@
                 android:padding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:saveEnabled="true"
+                android:lineBreakStyle="none"
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawableRight="@drawable/eye"
+
+
                 android:drawablePadding="8dp"
                 android:textColor="@color/grey"/>
 
@@ -66,8 +73,10 @@
                 android:text="Login"
                 android:id="@+id/login_button"
                 android:textSize="18sp"
+                android:textColor="@color/colorOnSecondary"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_button"/>
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/colorSecondaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"

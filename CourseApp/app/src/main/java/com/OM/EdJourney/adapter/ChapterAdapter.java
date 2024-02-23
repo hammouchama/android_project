@@ -1,4 +1,4 @@
-package com.rajendra.courseapp.adapter;
+package com.OM.EdJourney.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rajendra.courseapp.R;
-import com.rajendra.courseapp.model.Chapter;
-import com.rajendra.courseapp.model.PlayList;
+import com.OM.EdJourney.R;
+import com.OM.EdJourney.model.Chapter;
 
 import java.util.List;
 

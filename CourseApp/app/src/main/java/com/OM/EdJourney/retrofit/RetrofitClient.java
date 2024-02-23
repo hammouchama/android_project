@@ -1,4 +1,4 @@
-    package com.rajendra.courseapp.retrofit;
+    package com.OM.EdJourney.retrofit;
 
 
     import retrofit2.Retrofit;

@@ -1,4 +1,4 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import org.junit.Test;
 

@@ -1,10 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#62C127</color>
+    <color name="colorPrimaryDark">#008371</color>
+    <color name="colorPrimaryLight">#A2F78D</color>
+    <color name="colorSecondary">#00A6F0</color>
+    <color name="colorSecondaryDark">#005F8A</color>
+
+    <color name="colorSecondaryLight">#6DD7FF</color>
+    <color name="lavender">#00A6F0</color>
+    <color name="colorAccent">#005F8A</color>
+    <color name="grey">#ff424242</color>
+
+    <!-- Choose a dark background color -->
+    <color name="colorBackgroundDark">#002236</color>
+    <!-- Choose a dark color -->
+    <color name="colorDark">#002236</color>
+
+    <!-- Adjust background color -->
+    <color name="colorBackground">#FFFFFF</color>
+
+    <!-- Surface color remains dark -->
+    <color name="colorSurface">#002236</color>
+
+    <!-- Text and content colors -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color> <!-- Adjust as needed -->
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOnError">#FFFFFF</color>
+
+    <color name="colorPrimaryVariant">#008371</color>
+    <color name="colorSecondaryVariant">#005F8A</color>
+    <color name="colorOnPrimaryVariant">#FFFFFF</color>
+    <color name="colorOnSecondaryVariant">#FFFFFF</color>
+    <color name="colorPrimaryDarkVariant">#008371</color>
+    <color name="colorSecondaryDarkVariant">#005F8A</color>
+    <color name="colorOnPrimaryDarkVariant">#FFFFFF</color>
+    <color name="colorOnSecondaryDarkVariant">#FFFFFF</color>
+    <color name="colorPrimaryLightVariant">#A2F78D</color>
+
+
+    <!--<color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="lavender">#8692f7</color>
-    <color name="grey">#ff424242</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFF</color>
+    <color name="lavender">#8692f7</color>-->
 </resources>

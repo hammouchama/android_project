@@ -1,9 +1,8 @@
-package com.rajendra.courseapp.retrofit;
+package com.OM.EdJourney.retrofit;
 
-import com.rajendra.courseapp.model.Category;
-import com.rajendra.courseapp.model.Chapter;
-import com.rajendra.courseapp.model.Course;
-import com.rajendra.courseapp.model.User;
+import com.OM.EdJourney.model.Chapter;
+import com.OM.EdJourney.model.Course;
+import com.OM.EdJourney.model.User;
 
 import java.util.List;
 

@@ -1,8 +1,9 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,11 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.rajendra.courseapp.adapter.CoursesAdapter;
-import com.rajendra.courseapp.model.Category;
-import com.rajendra.courseapp.model.Course;
-import com.rajendra.courseapp.retrofit.ApiInterface;
-import com.rajendra.courseapp.retrofit.RetrofitClient;
+import com.OM.EdJourney.adapter.CoursesAdapter;
+import com.OM.EdJourney.model.Course;
+import com.OM.EdJourney.retrofit.ApiInterface;
+import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import java.io.IOException;
 import java.util.List;
@@ -122,17 +122,20 @@ public class MainActivity extends AppCompatActivity {
 
         /** Side bar **/
         drawerLayout = findViewById(R.id.drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
 
         // Handle click on hamburger icon
-        findViewById(R.id.toggleMenuIcon).setOnClickListener(new View.OnClickListener() {
+        ImageView toggleMenuIcon = findViewById(R.id.toggleMenuIcon);
+        toggleMenuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
             }
         });
 
@@ -156,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle item clicks here
+                Log.i("item.getItemId()",item.getItemId()+"");
+                Log.i("R.id.nav_logout",R.id.nav_logout+"");
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         Toast.makeText(MainActivity.this, "Home clicked", Toast.LENGTH_SHORT).show();
@@ -209,9 +214,6 @@ public class MainActivity extends AppCompatActivity {
      **/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
     /** END Side bar **/

@@ -1,4 +1,4 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.rajendra.courseapp.model.User;
-import com.rajendra.courseapp.retrofit.ApiInterface;
-import com.rajendra.courseapp.retrofit.RetrofitClient;
+import com.OM.EdJourney.model.User;
+import com.OM.EdJourney.retrofit.ApiInterface;
+import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;

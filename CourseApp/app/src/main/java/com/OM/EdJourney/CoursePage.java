@@ -1,26 +1,19 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.rajendra.courseapp.model.Category;
-import com.rajendra.courseapp.model.Course;
-import com.rajendra.courseapp.model.PlayList;
-import com.rajendra.courseapp.retrofit.ApiInterface;
-import com.rajendra.courseapp.retrofit.RetrofitClient;
+import com.OM.EdJourney.model.Course;
+import com.OM.EdJourney.retrofit.ApiInterface;
+import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CoursePage extends AppCompatActivity {
 

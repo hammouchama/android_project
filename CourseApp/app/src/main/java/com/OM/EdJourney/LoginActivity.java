@@ -1,8 +1,10 @@
-package com.rajendra.courseapp;
+package com.OM.EdJourney;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.rajendra.courseapp.model.User;
-import com.rajendra.courseapp.retrofit.ApiInterface;
-import com.rajendra.courseapp.retrofit.RetrofitClient;
+import com.OM.EdJourney.model.User;
+import com.OM.EdJourney.retrofit.ApiInterface;
+import com.OM.EdJourney.retrofit.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     TextView signupRedirectText;
     ApiInterface apiInterface;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,22 @@ public class LoginActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.login_password);
         signupRedirectText = findViewById(R.id.signupRedirectText);
         loginButton = findViewById(R.id.login_button);
+
+        loginPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_off, 0); // Set initial eye icon to 'off'
+        loginPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int DRAWABLE_RIGHT = 2;
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (motionEvent.getRawX() >= (loginPassword.getRight() - loginPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,4 +144,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // If password is currently visible, change input type to hide it and change eye icon to 'off'
+            loginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            loginPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_off, 0);
+            isPasswordVisible = false;
+        } else {
+            // If password is currently hidden, change input type to show it and change eye icon to 'on'
+            loginPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            loginPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye, 0);
+            isPasswordVisible = true;
+        }
+
+        // Move cursor to end of text
+        loginPassword.setSelection(loginPassword.getText().length());
+    }
+
 }

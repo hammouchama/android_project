@@ -155,7 +155,7 @@
         android:layout_marginStart="4dp"
         android:fontFamily="@font/nunito"
         android:text="17k"
-        android:textColor="#61688b"
+        android:textColor="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
@@ -189,7 +189,7 @@
         android:layout_marginStart="4dp"
         android:fontFamily="@font/nunito"
         android:text="4.2"
-        android:textColor="#61688b"
+        android:textColor="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="@+id/imageView9"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="@+id/imageView9" />

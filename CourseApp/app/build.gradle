@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.rajendra.courseapp"
+        applicationId "com.OM.EdJourney"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode 1

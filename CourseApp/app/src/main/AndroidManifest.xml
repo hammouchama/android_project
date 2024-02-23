@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rajendra.courseapp">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.OM.EdJourney">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,36 +14,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CoursePage"
+            android:name="com.OM.EdJourney.CoursePage"
             android:exported="true">
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-
-            <!-- Intent filters, etc. if applicable -->
-        </activity>
-        <activity
-            android:name=".SignupActivity"
-            android:exported="true">
-
-            <!-- Intent filters, etc. if applicable -->
-        </activity>
-
-        <activity
-            android:name=".CourseChaptersList"
+            android:name="com.OM.EdJourney.LoginActivity"
             android:exported="true">
 
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name=".CourseDetailsActivity"
+            android:name="com.OM.EdJourney.SignupActivity"
+            android:exported="true">
+
+            <!-- Intent filters, etc. if applicable -->
+        </activity>
+
+        <activity
+            android:name="com.OM.EdJourney.CourseChaptersList"
+            android:exported="true">
+
+            <!-- Intent filters, etc. if applicable -->
+        </activity>
+        <activity
+            android:name="com.OM.EdJourney.CourseDetailsActivity"
             android:exported="true">
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.OM.EdJourney.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
