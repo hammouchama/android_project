@@ -2,6 +2,8 @@ package com.OM.EdJourney;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     Button signupButton;
 
     ApiInterface apiInterface;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,24 @@ public class SignupActivity extends AppCompatActivity {
         signupPassword = findViewById(R.id.signup_password);
         signupButton = findViewById(R.id.signup_button);
         loginRedirectText = findViewById(R.id.loginRedirectText);
+
+
+        //Set the eye icon to the right of the password field
+        signupPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, R.drawable.ic_eye_off, 0); // Set initial eye icon to 'off'
+        signupPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int DRAWABLE_RIGHT = 2;
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (motionEvent.getRawX() >= (signupPassword.getRight() - signupPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        togglePasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,5 +100,25 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // If password is currently visible, change input type to hide it and change eye icon to 'off'
+            signupPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            signupPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, R.drawable.ic_eye_off, 0);
+            isPasswordVisible = false;
+        } else {
+            // If password is currently hidden, change input type to show it and change eye icon to 'on'
+            signupPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            signupPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, R.drawable.ic_eye, 0);
+            isPasswordVisible = true;
+        }
+
+        // Move cursor to end of text
+        signupPassword.setSelection(signupPassword.getText().length());
     }
 }
