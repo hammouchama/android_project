@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="240dp"
+                android:layout_gravity="center"
+                android:layout_margin="60dp"
+                android:padding="10dp"
+                android:src="@drawable/logo_full" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/start_learning_today"
+                android:textSize="30sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_learning"
+                android:padding="10dp"
+                android:layout_margin="15dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/lets_go"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buy_button_bg"
+                android:padding="10dp"
+                android:layout_margin="30dp"
+                android:text="Let's GO"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
