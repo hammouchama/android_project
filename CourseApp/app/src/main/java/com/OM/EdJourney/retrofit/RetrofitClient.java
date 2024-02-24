@@ -8,7 +8,7 @@
 
         private  static Retrofit retrofit;
         //private static final String BASE_URL = "https://androidappsforyoutube.s3.ap-south-1.amazonaws.com/course_app/";
-        private static final String BASE_URL="http://192.168.1.105:8084/api/";
+        private static final String BASE_URL="http://192.168.1.56:8084/api/";
         public static Retrofit getRetrofitClient(){
 
 
