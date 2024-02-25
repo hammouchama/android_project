@@ -13,10 +13,6 @@ public class Chapter {
     @Expose
     private String chapterName;
 
-    @SerializedName("isLocked")
-    @Expose
-    private int isLocked;
-
     @SerializedName("videoUrl")
     @Expose
     private String videoUrl;
@@ -40,14 +36,6 @@ public class Chapter {
 
     public void setChapterName(String chapterName) {
         this.chapterName = chapterName;
-    }
-
-    public int getIsLocked() {
-        return isLocked;
-    }
-
-    public void setIsLocked(int isLocked) {
-        this.isLocked = isLocked;
     }
 
     public String getVideoUrl() {

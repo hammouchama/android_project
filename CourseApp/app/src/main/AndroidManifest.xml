@@ -33,8 +33,10 @@
 
         <activity
             android:name="com.OM.EdJourney.CourseChaptersList"
+            android:exported="true"/>
+        <activity
+            android:name="com.OM.EdJourney.WelcomeActivity"
             android:exported="true">
-
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity

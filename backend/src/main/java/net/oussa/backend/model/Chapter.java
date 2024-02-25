@@ -22,7 +22,7 @@ public class Chapter {
     private String videoUrl;
 
     @Column(columnDefinition = "TEXT")
-    private String Description;
+    private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id", nullable = false)

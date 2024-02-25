@@ -41,7 +41,7 @@ public class CoursePage extends AppCompatActivity {
 
         courseRecyclerView = findViewById(R.id.course_recycler);
 
-        Call<List<Course>> call = apiInterface.getCourseContent();
+        //Call<List<Course>> call = apiInterface.getCourseContent();
   /*
         call.enqueue(new Callback<List<Course>>() {
             @Override

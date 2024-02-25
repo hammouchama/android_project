@@ -47,12 +47,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //check if user logged
         SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
 
         if (!preferences.contains("name") || !preferences.contains("email") || !preferences.contains("username") || !preferences.contains("password")) {
             // User information is not available, redirect to LoginActivity
-            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(loginIntent);
             finish(); // Optional: Finish the current activity to prevent returning to it on back press
             return;
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
 
                 // Redirect to LoginActivity
-                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
                 startActivity(loginIntent);
 
                 // Optional: Finish the current activity to prevent returning to it on back press
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         /** Side bar **/
+
         drawerLayout = findViewById(R.id.drawer_layout);
 
 
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         // Redirect to LoginActivity
-                        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
                         startActivity(loginIntent);
 
                         // Optional: Finish the current activity to prevent returning to it on back press

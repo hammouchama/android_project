@@ -28,13 +28,15 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
     @NonNull
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_course_chapters_list, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.course_list_chapters_items, parent, false);
         return new CourseViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         holder.chapterName.setText(chapterList.get(position).getChapterName());
+        holder.contentNumber.setText(chapterList.get(position).getChapterId().toString());
+        holder.contentTime.setText("40 min");
     }
 
     @Override
@@ -42,12 +44,14 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
         return chapterList.size();
     }
 
-    public class CourseViewHolder extends RecyclerView.ViewHolder {
-        TextView chapterName;
+    public static class CourseViewHolder extends RecyclerView.ViewHolder {
+        TextView chapterName,contentNumber,contentTime;
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
             chapterName = itemView.findViewById(R.id.chapter_name);
+            contentNumber=itemView.findViewById(R.id.content_number);
+            contentTime=itemView.findViewById(R.id.content_time);
         }
     }
 }

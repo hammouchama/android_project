@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
         start.setOnClickListener(v -> {
             Intent intent = new Intent(CourseDetailsActivity.this, CourseChaptersList.class);
-            intent.putExtra("courseId", 1);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
         });
 
@@ -63,7 +64,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         start = findViewById(R.id.start_course);
         Intent intent = getIntent();
 
-        title.setText("Welcome To " + Objects.requireNonNull(intent.getStringExtra("courseName")));
+        title.setText("Welcome To " + Objects.requireNonNull(intent.getStringExtra("courseName")) +" course");
         description.setText(Objects.requireNonNull(intent.getStringExtra("courseDescription")));
 
         String courseIdString = intent.getStringExtra("courseId");
