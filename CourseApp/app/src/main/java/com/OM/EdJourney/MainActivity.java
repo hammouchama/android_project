@@ -26,8 +26,6 @@ import com.OM.EdJourney.retrofit.ApiInterface;
 import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!preferences.contains("name") || !preferences.contains("email") || !preferences.contains("username") || !preferences.contains("password")) {
             // User information is not available, redirect to LoginActivity
-            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
             startActivity(loginIntent);
             finish(); // Optional: Finish the current activity to prevent returning to it on back press
             return;
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
 
                 // Redirect to LoginActivity
-                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
                 startActivity(loginIntent);
 
                 // Optional: Finish the current activity to prevent returning to it on back press
@@ -124,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         /** Side bar **/
+
         drawerLayout = findViewById(R.id.drawer_layout);
 
 
@@ -183,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
 
                         // Redirect to LoginActivity
-                        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        Intent loginIntent = new Intent(MainActivity.this, WelcomeActivity.class);
                         startActivity(loginIntent);
 
                         // Optional: Finish the current activity to prevent returning to it on back press

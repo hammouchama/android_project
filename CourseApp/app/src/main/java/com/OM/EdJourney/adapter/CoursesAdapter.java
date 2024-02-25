@@ -35,7 +35,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.category_row_items, parent, false);
 
-
         // now here we create a recyclerview row items.
         return new CategoryViewHolder(view);
     }
@@ -46,9 +45,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
         // here we will bind data in recyclerview ro items.
 
         holder.courseName.setText(courseList.get(position).getCourseName());
-       // holder.courseDescription.setText(courseList.get(position).getCourseDescription());
-        //holder.courseId.setText(courseList.get(position).getCourseId().toString());
-
         //holder.courseDescription.setVisibility(View.GONE);
 
 
@@ -63,7 +59,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
             public void onClick(View view) {
 
                 Intent i = new Intent(context, CourseDetailsActivity.class);
-                i.putExtra("courseId",courseList.get(position).getCourseId());
+                i.putExtra("courseId",courseList.get(position).getCourseId().toString());
                 i.putExtra("courseName",holder.courseName.getText());
                 i.putExtra("courseDescription",courseList.get(position).getCourseDescription());
                 i.putExtra("courseImage",courseList.get(position).getImage());

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CourseDetailsActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/lavender"
-            android:minHeight="?attr/actionBarSize"
+            android:minHeight="50sp"
+            app:titleTextColor="@color/white"
             android:theme="?attr/actionBarTheme"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
@@ -29,7 +31,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="45dp"
 
         >
 
@@ -57,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:background="@drawable/white_background"
+                    android:background="@drawable/buy_layout_bg"
                     android:layout_margin="10dp">
                 <TextView
                     android:id="@+id/course_title"
