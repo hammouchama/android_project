@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CourseChaptersList">
+    tools:context=".ui.chapter.CourseChaptersList">
 
 
 
@@ -50,14 +50,14 @@
           android:layout_marginEnd="16dp"
           android:layout_marginBottom="16dp"
           app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toStartOf="@+id/textView6"
+          app:layout_constraintEnd_toStartOf="@+id/enrollBtn"
           app:layout_constraintHorizontal_bias="1.0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:srcCompat="@drawable/ic_shopping_bag" />
 
       <TextView
-          android:id="@+id/textView6"
+          android:id="@+id/enrollBtn"
           android:layout_width="204dp"
           android:layout_height="50dp"
           android:layout_marginStart="16dp"
@@ -67,7 +67,7 @@
           android:background="@drawable/buy_button_bg"
           android:fontFamily="@font/nunito_bold"
           android:gravity="center"
-          android:text="Buy Now"
+          android:text="Enroll Now"
           android:textAlignment="center"
           android:textColor="#FFFFFF"
           android:textSize="18sp"

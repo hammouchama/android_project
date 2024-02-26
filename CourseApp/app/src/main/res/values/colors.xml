@@ -29,7 +29,7 @@
     <!-- Text and content colors -->
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorOnSecondary">#FFFFFF</color>
-    <color name="colorOnBackground">#000000</color> <!-- Adjust as needed -->
+    <color name="colorOnBackground">#000000</color>
     <color name="colorOnSurface">#FFFFFF</color>
     <color name="colorOnError">#FFFFFF</color>
 
@@ -42,10 +42,10 @@
     <color name="colorOnPrimaryDarkVariant">#FFFFFF</color>
     <color name="colorOnSecondaryDarkVariant">#FFFFFF</color>
     <color name="colorPrimaryLightVariant">#A2F78D</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 
-
-    <!--<color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="lavender">#8692f7</color>-->
 </resources>

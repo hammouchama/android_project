@@ -14,38 +14,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.OM.EdJourney.CoursePage"
+            android:name=".QuizActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.course.CoursePage"
+            android:exported="true">
+
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name="com.OM.EdJourney.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
 
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name="com.OM.EdJourney.SignupActivity"
+            android:name=".SignupActivity"
             android:exported="true">
 
             <!-- Intent filters, etc. if applicable -->
         </activity>
+        <activity
+            android:name=".ui.chapter.CourseChaptersList"
+            android:exported="true" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true">
 
-        <activity
-            android:name="com.OM.EdJourney.CourseChaptersList"
-            android:exported="true"/>
-        <activity
-            android:name="com.OM.EdJourney.WelcomeActivity"
-            android:exported="true">
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name="com.OM.EdJourney.CourseDetailsActivity"
+            android:name=".ui.course.CourseDetailsActivity"
             android:exported="true">
+
             <!-- Intent filters, etc. if applicable -->
         </activity>
         <activity
-            android:name="com.OM.EdJourney.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

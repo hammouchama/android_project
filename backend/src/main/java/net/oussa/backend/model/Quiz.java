@@ -18,11 +18,15 @@ public class Quiz {
     private Long quizId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "chapter_id", nullable = false)
     private Chapter chapter;
 
-    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Question> questions=new ArrayList<>();
+    @Column(name = "number_of_questions")
+    private int numberOfQuestions;
+
+    @OneToMany(mappedBy = "quiz", orphanRemoval = true,cascade = CascadeType.ALL)
+    private List<Question> questions;
+
 
 }

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.OM.EdJourney.CourseDetailsActivity;
+import com.OM.EdJourney.ui.course.CourseDetailsActivity;
 import com.OM.EdJourney.R;
 
 import com.OM.EdJourney.model.Course;

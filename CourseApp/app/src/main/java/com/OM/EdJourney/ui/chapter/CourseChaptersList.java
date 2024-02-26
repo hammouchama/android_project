@@ -1,24 +1,23 @@
-package com.OM.EdJourney;
+package com.OM.EdJourney.ui.chapter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.OM.EdJourney.QuizActivity;
+import com.OM.EdJourney.R;
 import com.OM.EdJourney.adapter.ChapterAdapter;
-import com.OM.EdJourney.adapter.CoursesAdapter;
 import com.OM.EdJourney.model.Chapter;
-import com.OM.EdJourney.model.Course;
 import com.OM.EdJourney.retrofit.ApiInterface;
 import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,6 +64,17 @@ public class CourseChaptersList extends AppCompatActivity {
             }
         });
 
+        // add onclick listner on the id imageView10
+        /*TEST*/
+        ImageView imageView10 = findViewById(R.id.imageView10);
+        Long chapterId = 1L;
+        imageView10.setOnClickListener(v -> {
+            Intent intent1 = new Intent(this, QuizActivity.class);
+            intent1.putExtra("CHAPTER_ID", chapterId);
+            startActivity(intent1);
+        });
+
+
 
 
     }
@@ -77,4 +87,5 @@ public class CourseChaptersList extends AppCompatActivity {
         chapterAdapter.notifyDataSetChanged();
 
     }
+
 }

@@ -2,6 +2,7 @@ package net.oussa.backend.controller;
 
 
 import lombok.AllArgsConstructor;
+import net.oussa.backend.model.Question;
 import net.oussa.backend.model.Quiz;
 import net.oussa.backend.service.QuizService;
 import org.springframework.http.HttpStatus;
@@ -36,9 +37,9 @@ public class QuizController {
     }
 
     @GetMapping("/getByChapter/{chapterId}")
-    public ResponseEntity<?> getQuizzesByChapter(@PathVariable long chapterId) {
+    public ResponseEntity<?> getQuizByChapter(@PathVariable long chapterId) {
         try {
-            return quizService.getQuizzesByChapter(chapterId);
+            return quizService.getQuizByChapter(chapterId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,6 +70,20 @@ public class QuizController {
     public ResponseEntity<?> getAllQuizzes() {
         try {
             return quizService.getAllQuizzes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Questions
+     * */
+    // add question or more
+    @PostMapping("/addQuestion/{quizId}")
+    public ResponseEntity<?> addQuestion(@RequestBody Question question, @PathVariable long quizId) {
+        try {
+            return quizService.addQuestion(quizId, question);
         } catch (Exception e) {
             e.printStackTrace();
         }

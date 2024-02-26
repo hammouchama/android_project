@@ -1,4 +1,4 @@
-package com.OM.EdJourney;
+package com.OM.EdJourney.ui.course;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,13 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.OM.EdJourney.model.Course;
+import com.OM.EdJourney.ui.chapter.CourseChaptersList;
+import com.OM.EdJourney.R;
 import com.OM.EdJourney.retrofit.ApiInterface;
 import com.OM.EdJourney.retrofit.RetrofitClient;
-
-import java.util.List;
-
-import retrofit2.Call;
 
 public class CoursePage extends AppCompatActivity {
 

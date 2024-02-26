@@ -2,6 +2,7 @@ package net.oussa.backend.service;
 
 import lombok.AllArgsConstructor;
 import net.oussa.backend.model.Chapter;
+import net.oussa.backend.model.Question;
 import net.oussa.backend.model.Quiz;
 import net.oussa.backend.repository.ChapterRepository;
 import net.oussa.backend.repository.QuizRepository;
@@ -23,6 +24,12 @@ public class QuizService {
             Optional<Chapter> chapter = chapterRepository.findById(chapterId);
             if (chapter.isPresent()){
                 quiz.setChapter(chapter.get());
+                // add this quiz id to each question
+                List<Question> questions = quiz.getQuestions();
+                for (Question question : questions) {
+                    question.setQuiz(quiz);
+                }
+
                 quizRepository.save(quiz);
                 return ResponseEntity.ok("Quiz added successfully");
             }
@@ -49,14 +56,13 @@ public class QuizService {
         }
     }
 
-    public ResponseEntity<?> getQuizzesByChapter(long chapterId) {
+    public ResponseEntity<?> getQuizByChapter(long chapterId) {
         try {
-            // Implement logic to retrieve quizzes by chapter ID from the database
-            List<Quiz> quizzes = quizRepository.findByChapterChapterId(chapterId);
-            return ResponseEntity.ok(quizzes);
+            Quiz quiz = quizRepository.findByChapterChapterId(chapterId);
+            return ResponseEntity.ok(quiz);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body("Failed to retrieve quizzes by chapter");
+            return ResponseEntity.status(500).body("Failed to retrieve quiz by chapter");
         }
     }
 
@@ -100,6 +106,28 @@ public class QuizService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to retrieve quizzes");
+        }
+    }
+
+    /**
+     * Questions
+     * */
+    public ResponseEntity<?> addQuestion(long quizId, Question question) {
+        try {
+            Optional<Quiz> quizOptional = quizRepository.findById(quizId);
+            if (quizOptional.isPresent()) {
+                Quiz quiz = quizOptional.get();
+                List<Question> questions = quiz.getQuestions();
+                questions.add(question);
+                quiz.setQuestions(questions);
+                quizRepository.save(quiz);
+                return ResponseEntity.ok("Question added successfully");
+            } else {
+                return ResponseEntity.status(404).body("Quiz not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Failed to add question");
         }
     }
 }
