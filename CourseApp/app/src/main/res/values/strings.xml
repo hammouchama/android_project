@@ -13,4 +13,8 @@
         today!</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="oussama_hammoucham">Oussama Hammoucham</string>
+    <string name="get_start">GEt Start</string>
+    <string name="wlecome_to_java">Wlecome To java</string>
+    <string name="view_profile">View Profile</string>
 </resources>

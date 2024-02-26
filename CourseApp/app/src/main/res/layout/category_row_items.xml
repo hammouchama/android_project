@@ -4,16 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/courseCard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="9dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="20dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,23 +17,36 @@
                 android:layout_width="150dp"
                 android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/business"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:background="@drawable/buy_button_bg"/>
 
             <TextView
                 android:id="@+id/course_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/courseImage"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/nunito"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:padding="4dp"
+                android:fontFamily="@font/nunito_bold"
                 android:text="Marketing"
-                android:textColor="@color/lavender"
-                android:textSize="20sp" />
+                android:textColor="@color/colorDark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/course_name"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:text="oussama"
+                android:textSize="15sp" />
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
 </androidx.cardview.widget.CardView>
