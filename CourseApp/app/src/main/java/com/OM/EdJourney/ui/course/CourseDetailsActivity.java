@@ -1,4 +1,4 @@
-package com.OM.EdJourney;
+package com.OM.EdJourney.ui.course;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,11 +8,12 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.OM.EdJourney.ui.chapter.CourseChaptersList;
+import com.OM.EdJourney.R;
 import com.bumptech.glide.Glide;
 
 import java.util.Objects;

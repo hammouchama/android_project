@@ -9,5 +9,5 @@ import java.util.List;
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
     // Custom query method to retrieve quizzes by chapter ID
-    List<Quiz> findByChapterChapterId(long chapterId);
+    Quiz findByChapterChapterId(long chapterId);
 }

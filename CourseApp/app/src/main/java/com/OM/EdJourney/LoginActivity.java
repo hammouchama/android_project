@@ -38,7 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         signupRedirectText = findViewById(R.id.signupRedirectText);
         loginButton = findViewById(R.id.login_button);
 
-        loginPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_eye_off, 0); // Set initial eye icon to 'off'
+        //Set the eye icon to the right of the password field
+        loginPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, R.drawable.ic_eye_off, 0); // Set initial eye icon to 'off'
         loginPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -149,12 +150,12 @@ public class LoginActivity extends AppCompatActivity {
         if (isPasswordVisible) {
             // If password is currently visible, change input type to hide it and change eye icon to 'off'
             loginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            loginPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_eye_off, 0);
+            loginPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, R.drawable.ic_eye_off, 0);
             isPasswordVisible = false;
         } else {
             // If password is currently hidden, change input type to show it and change eye icon to 'on'
             loginPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            loginPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_eye, 0);
+            loginPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_lock_24, 0, R.drawable.ic_eye, 0);
             isPasswordVisible = true;
         }
 

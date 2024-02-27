@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Quizzes")
 @Getter @Setter @ToString @Builder @AllArgsConstructor @NoArgsConstructor
-public class Quiz {
+public class QuizDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +17,15 @@ public class Quiz {
     private Long quizId;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "chapter_id", nullable = false)
     private Chapter chapter;
 
     @Column(name = "number_of_questions")
     private int numberOfQuestions;
 
-    @OneToMany(mappedBy = "quiz", orphanRemoval = true,cascade = CascadeType.ALL)
-    private List<Question> questions;
+    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Question> questions=new ArrayList<>();
 
 
 }

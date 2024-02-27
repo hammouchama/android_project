@@ -29,4 +29,9 @@ public class Chapter {
     @JsonIgnore
     private Course course;
 
+    //one quiz
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
+
 }

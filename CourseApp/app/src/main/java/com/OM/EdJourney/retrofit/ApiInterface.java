@@ -2,6 +2,8 @@ package com.OM.EdJourney.retrofit;
 
 import com.OM.EdJourney.model.Chapter;
 import com.OM.EdJourney.model.Course;
+import com.OM.EdJourney.model.Question;
+import com.OM.EdJourney.model.Quiz;
 import com.OM.EdJourney.model.User;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public interface ApiInterface {
     @GET("course/{id}/chapters")
     Call<List<Chapter>> getCourseChapters(@Path("id")Long id);
 
-    // we need to make model class for our data
-    // first have a look on json structure.
+    @GET("quiz/getByChapter/{chapterId}")
+    Call<Quiz> getQuizByChapter(@Path("chapterId")Long chapterId);
 
 }
