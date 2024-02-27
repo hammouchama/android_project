@@ -29,6 +29,6 @@ public class Course {
     private String teacher;
 
     private float stars;
-    
+
 
 }
