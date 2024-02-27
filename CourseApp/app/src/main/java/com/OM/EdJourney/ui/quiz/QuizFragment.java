@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,15 +46,16 @@ public class QuizFragment extends Fragment {
     private QuizFragmentBinding binding;
     // Question list
     private List<Question> questionList;
+    private int questionNumber;
 
     public QuizFragment() {
         // Required empty public constructor
     }
 
-    public static QuizFragment newInstance(int questionNumber, Long chapterId) {
+    public static QuizFragment newInstance(Long chapterId) {
         QuizFragment fragment = new QuizFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_QUESTION_NUMBER, questionNumber);
+        args.putInt(ARG_QUESTION_NUMBER, 0);
         args.putLong(ARG_CHAPTER_ID, chapterId);
         fragment.setArguments(args);
         //Toast to display the chapterId and questionNumber
@@ -74,7 +76,7 @@ public class QuizFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            int questionNumber = getArguments().getInt(ARG_QUESTION_NUMBER);
+            questionNumber = getArguments().getInt(ARG_QUESTION_NUMBER);
             chapterId = getArguments().getLong(ARG_CHAPTER_ID);
 
             fetchQuizDetails(chapterId);
@@ -92,8 +94,12 @@ public class QuizFragment extends Fragment {
         // Set question text
         binding.questionTextView.setText(question.getQuestionText());
 
-        // have an array of options but only those not null
-        String[] options = new String[4];
+        int numOfOptions = question.getOption1() != null ? 1 : 0;
+        numOfOptions += question.getOption2() != null ? 1 : 0;
+        numOfOptions += question.getOption3() != null ? 1 : 0;
+        numOfOptions += question.getOption4() != null ? 1 : 0;
+
+        String[] options = new String[numOfOptions];
         int j=0;
         if(question.getOption1()!=null)
             options[j++]=question.getOption1();
@@ -104,11 +110,22 @@ public class QuizFragment extends Fragment {
         if(question.getOption4()!=null)
             options[j++]=question.getOption4();
 
+        // loop on the number of other inexistant option to delete it from showing up
+        for(int z=j;z<4;z++){
+            if(z==0)
+                binding.optionATextView.setVisibility(View.GONE);
+            else if(z==1)
+                binding.optionBTextView.setVisibility(View.GONE);
+            else if(z==2)
+                binding.optionCTextView.setVisibility(View.GONE);
+            else if(z==3)
+                binding.optionDTextView.setVisibility(View.GONE);
+        }
 
 
         // shuffle the array but keep track on the correct answer
-        int correctAnswer = question.getCorrectOption();
-        int[] positions = randomPositionArray(options.length);
+        int correctAnswer = question.getCorrectOption()-1;
+        int[] positions = randomPositionArray(j);
         for (int i = 0; i < options.length; i++) {
             if (i == 0) {
                 binding.optionATextView.setText(options[positions[i]]);
@@ -125,6 +142,60 @@ public class QuizFragment extends Fragment {
         // Implement logic to handle user selection and proceed to the next question
         // For example, you can add click listeners to the option views.
 
+        binding.optionATextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleUserSelection(positions[0], questionNumber, questionList, correctAnswer);
+            }
+        });
+
+        binding.optionBTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleUserSelection(positions[1], questionNumber, questionList, correctAnswer);
+            }
+        });
+
+        binding.optionCTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleUserSelection(positions[2], questionNumber, questionList, correctAnswer);
+            }
+        });
+
+        binding.optionDTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleUserSelection(positions[3], questionNumber, questionList, correctAnswer);
+            }
+        });
+
+
+    }
+
+    private void handleUserSelection(int selectedOption, int questionNumber, List<Question> questionList, int correctAnswer) {
+        // Implement logic to handle user selection and proceed to the next question
+        // For example, you can add click listeners to the option views.
+        // If the selected option is correct, display a message and proceed to the next question.
+        // If the selected option is incorrect, display a message and allow the user to try again.
+
+        Log.i("selectedOption", selectedOption + "");
+        Log.i("correctAnswer", correctAnswer + "");
+
+        if (selectedOption == correctAnswer) {
+            Toast.makeText(getContext(), "Correct!", Toast.LENGTH_SHORT).show();
+            // Proceed to the next question
+            if (questionNumber < questionList.size() - 1) {
+                displayQuestion(questionNumber + 1);
+                this.questionNumber++;
+            } else {
+                // Quiz complete
+                Toast.makeText(getContext(), "Quiz complete", Toast.LENGTH_SHORT).show();
+                questionNumber= 0;
+            }
+        } else {
+            Toast.makeText(getContext(), "Incorrect. Try again!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private int[] randomPositionArray(int length) {

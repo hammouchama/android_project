@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.OM.EdJourney.QuizActivity;
 import com.OM.EdJourney.R;
 import com.OM.EdJourney.adapter.ChapterAdapter;
 import com.OM.EdJourney.model.Chapter;
@@ -55,7 +53,7 @@ public class CourseChaptersList extends AppCompatActivity {
             public void onResponse(Call<List<Chapter>> call, Response<List<Chapter>> response) {
                 List<Chapter> chapterList = response.body();
                 // Assuming you want a vertical list, use LinearLayoutManager
-                getAllCategory(chapterList);
+                getAllCategory(chapterList,courseId);
             }
 
             @Override
@@ -64,25 +62,24 @@ public class CourseChaptersList extends AppCompatActivity {
             }
         });
 
-        // add onclick listner on the id imageView10
-        /*TEST*/
+        /*// add onclick listner on the id imageView10
         ImageView imageView10 = findViewById(R.id.imageView10);
         Long chapterId = 1L;
         imageView10.setOnClickListener(v -> {
             Intent intent1 = new Intent(this, QuizActivity.class);
             intent1.putExtra("CHAPTER_ID", chapterId);
             startActivity(intent1);
-        });
+        });*/
 
 
 
 
     }
-    private void getAllCategory(List<Chapter> chapterList) {
+    private void getAllCategory(List<Chapter> chapterList, Long courseId) {
 
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
         chaptersRecyclerView.setLayoutManager(layoutManager);
-        chapterAdapter = new ChapterAdapter(this, chapterList);
+        chapterAdapter = new ChapterAdapter(this, chapterList,courseId);
         chaptersRecyclerView.setAdapter(chapterAdapter);
         chapterAdapter.notifyDataSetChanged();
 
