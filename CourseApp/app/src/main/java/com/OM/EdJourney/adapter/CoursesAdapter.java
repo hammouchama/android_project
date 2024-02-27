@@ -45,6 +45,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
         // here we will bind data in recyclerview ro items.
 
         holder.courseName.setText(courseList.get(position).getCourseName());
+        holder.teacher.setText(courseList.get(position).getTeacher());
+        holder.stars.setText(courseList.get(position).getStars()+"");
+        holder.nb_chapter.setText(courseList.get(position).getNb_chapter()+" Lesson");
         //holder.courseDescription.setVisibility(View.GONE);
 
 
@@ -63,6 +66,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
                 i.putExtra("courseName",holder.courseName.getText());
                 i.putExtra("courseDescription",courseList.get(position).getCourseDescription());
                 i.putExtra("courseImage",courseList.get(position).getImage());
+                i.putExtra("teacher",courseList.get(position).getTeacher());
+                i.putExtra("nb_chapter",courseList.get(position).getNb_chapter());
+                i.putExtra("stars",courseList.get(position).getStars()+" ");
                 context.startActivity(i);
 
             }
@@ -78,13 +84,16 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
     public static class CategoryViewHolder extends RecyclerView.ViewHolder{
 
         ImageView courseImage;
-        TextView courseName;
+        TextView courseName,nb_chapter,stars,teacher;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             courseImage = itemView.findViewById(R.id.courseImage);
             courseName = itemView.findViewById(R.id.course_name);
+            nb_chapter=itemView.findViewById(R.id.number_chapters);
+            stars=itemView.findViewById(R.id.stars);
+            teacher=itemView.findViewById(R.id.teacher);
 
         }
     }

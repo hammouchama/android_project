@@ -21,7 +21,7 @@ import java.util.Objects;
 public class CourseDetailsActivity extends AppCompatActivity {
 
     ImageView image;
-    TextView description,title;
+    TextView description,title,teacher,stars;
 
     Button start;
 
@@ -65,12 +65,16 @@ public class CourseDetailsActivity extends AppCompatActivity {
         image = findViewById(R.id.image);
         title = findViewById(R.id.course_title);
         description = findViewById(R.id.description);
+        teacher=findViewById(R.id.teacher);
+        stars=findViewById(R.id.stars);
 
         start = findViewById(R.id.start_course);
         Intent intent = getIntent();
 
         title.setText("Welcome To " + Objects.requireNonNull(intent.getStringExtra("courseName")) +" course");
         description.setText(Objects.requireNonNull(intent.getStringExtra("courseDescription")));
+        teacher.setText(Objects.requireNonNull(intent.getStringExtra("teacher")));
+        stars.setText(Objects.requireNonNull(intent.getStringExtra("stars")));
 
         String courseIdString = intent.getStringExtra("courseId");
         if (courseIdString != null) {

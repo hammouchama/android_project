@@ -1,6 +1,7 @@
 package net.oussa.backend.service;
 
 import lombok.AllArgsConstructor;
+import net.oussa.backend.mappers.CourseDTO;
 import net.oussa.backend.model.Course;
 import net.oussa.backend.repository.CourseRepository;
 import net.oussa.backend.util.Helper;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -54,8 +56,13 @@ public class CourseService {
 
     public ResponseEntity<?> getAllCourses() {
         try {
-            List<Course> courses=courseRepository.findAll();
-            return new ResponseEntity<>(courses,HttpStatus.OK);
+            List<Object[]> courses=courseRepository.getAllCourse();
+            List<CourseDTO> result=new ArrayList<>();
+            for (var course:courses) {
+                result.add(new CourseDTO(course));
+            }
+            System.out.println(courses.get(0));
+            return new ResponseEntity<>(result,HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -71,6 +78,8 @@ public class CourseService {
                 newCourse.setCourseId(id);
                 newCourse.setCourseDescription(course.getCourseDescription());
                 newCourse.setCourseName(course.getCourseName());
+                newCourse.setStars(course.getStars());
+                newCourse.setTeacher(course.getTeacher());
                 if(!image.isEmpty()){
                     newCourse.setImage(Helper.saveImage(image,serverAddress));
                 }
