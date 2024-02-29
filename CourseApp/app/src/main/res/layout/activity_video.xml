@@ -44,7 +44,7 @@
             android:padding="20dp"
             android:layout_margin="20dp"
             android:background="@drawable/buy_button_bg"
-            android:text="To quiz"
+            android:text="Continue To quiz"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
