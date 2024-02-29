@@ -28,6 +28,8 @@ public class CourseChaptersList extends AppCompatActivity {
     ApiInterface apiInterface;
     Long courseId;
 
+    String courseName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class CourseChaptersList extends AppCompatActivity {
 
         if (intent != null && intent.hasExtra("courseId")) {
             courseId = intent.getLongExtra("courseId", 0); // Provide a default value if "courseId" is not present
+            courseName = intent.getStringExtra("courseName");
             Log.i("course id ", String.valueOf(courseId));
         } else {
             courseId = null;
@@ -79,7 +82,7 @@ public class CourseChaptersList extends AppCompatActivity {
 
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
         chaptersRecyclerView.setLayoutManager(layoutManager);
-        chapterAdapter = new ChapterAdapter(this, chapterList,courseId);
+        chapterAdapter = new ChapterAdapter(this, chapterList,courseId,courseName);
         chaptersRecyclerView.setAdapter(chapterAdapter);
         chapterAdapter.notifyDataSetChanged();
 

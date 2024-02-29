@@ -17,4 +17,10 @@
     <string name="get_start">GEt Start</string>
     <string name="wlecome_to_java">Wlecome To java</string>
     <string name="view_profile">View Profile</string>
+    <string name="PreQuiz_advices_1">Ensure a quiet environment for focus.</string>
+    <string name="PreQuiz_advices_2">Read each question carefully and manage time wisely.</string>
+    <string name="PreQuiz_advices_3">You can repeat the quiz multiple times.</string>
+    <string name="PreQuiz_advices_4">Questions are randomized for variety.</string>
+    <string name="PreQuiz_advices_5">Achieve the mentioned score to progress.</string>
+    <string name="PreQuiz_advices_6">Good luck!</string>
 </resources>

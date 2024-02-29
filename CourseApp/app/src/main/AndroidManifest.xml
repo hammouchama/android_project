@@ -14,9 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.quiz.PreQuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.quiz.QuizActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.course.CoursePage"
             android:exported="true">

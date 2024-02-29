@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.OM.EdJourney.ui.quiz.PreQuizActivity;
 import com.OM.EdJourney.ui.quiz.QuizActivity;
 import com.OM.EdJourney.R;
 import com.OM.EdJourney.model.Chapter;
@@ -23,11 +24,13 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
     Context context;
     List<Chapter> chapterList;
     Long courseId;
+    String courseName;
 
-    public ChapterAdapter(Context context, List<Chapter> chapterList, Long courseId) {
+    public ChapterAdapter(Context context, List<Chapter> chapterList, Long courseId, String courseName) {
         this.context = context;
         this.chapterList = chapterList;
         this.courseId = courseId;
+        this.courseName = courseName;
     }
 
     @NonNull
@@ -46,10 +49,12 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
         holder.start_chapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, QuizActivity.class);
+                Intent intent = new Intent(context, PreQuizActivity.class);
                 intent.putExtra("chapterName", chapterList.get(position).getChapterName());
                 intent.putExtra("chapterId", chapterList.get(position).getChapterId());
-                intent.putExtra("contentNumber", holder.contentNumber.getText().toString());
+                intent.putExtra("contentNumber", Integer.valueOf(holder.contentNumber.getText().toString()));
+                intent.putExtra("courseName", courseName);
+
 
                 intent.putExtra("courseId", courseId);
                 context.startActivity(intent);

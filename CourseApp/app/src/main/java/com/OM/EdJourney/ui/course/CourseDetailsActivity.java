@@ -27,6 +27,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
     Button start;
 
     ActionBar actionBar;
+    String courseName;
     private static Long courseId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         start.setOnClickListener(v -> {
             Intent intent = new Intent(CourseDetailsActivity.this, CourseChaptersList.class);
             intent.putExtra("courseId", courseId);
+            intent.putExtra("courseName", title.getText().toString());
             startActivity(intent);
         });
 
@@ -69,8 +71,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
         start = findViewById(R.id.start_course);
         Intent intent = getIntent();
+        courseName = intent.getStringExtra("courseName");
 
-        title.setText("Welcome To " + Objects.requireNonNull(intent.getStringExtra("courseName")) +" course");
+        title.setText("Welcome To " + Objects.requireNonNull(courseName) +" course");
         description.setText(Objects.requireNonNull(intent.getStringExtra("courseDescription")));
 
         String courseIdString = intent.getStringExtra("courseId");

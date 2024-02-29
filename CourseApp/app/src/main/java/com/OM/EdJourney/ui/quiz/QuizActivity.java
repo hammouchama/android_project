@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.OM.EdJourney.R;
+import com.OM.EdJourney.model.Quiz;
 import com.OM.EdJourney.ui.quiz.QuizFragment;
 
 public class QuizActivity extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class QuizActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Long chapterId, courseId;
     private String chapterName , contentNumber;
+    Quiz quiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,15 @@ public class QuizActivity extends AppCompatActivity {
         courseId = getIntent().getLongExtra("courseId", 0L);
         contentNumber = getIntent().getStringExtra("contentNumber");
         chapterName = getIntent().getStringExtra("chapterName");
+        quiz = (Quiz) getIntent().getSerializableExtra("quiz");
+
 
         // Display the first quiz question
-        showQuizFragment(chapterId);
+        showQuizFragment(chapterId, quiz);
     }
 
-    private void showQuizFragment(Long chapterId) {
-        QuizFragment quizFragment = QuizFragment.newInstance(chapterId);
+    private void showQuizFragment(Long chapterId, Quiz quiz) {
+        QuizFragment quizFragment = QuizFragment.newInstance(chapterId, quiz);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.quizContainer, quizFragment);

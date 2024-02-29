@@ -41,22 +41,25 @@ public class QuizFragment extends Fragment {
 
     private static final String ARG_QUESTION_NUMBER = "question_number";
     private static final String ARG_CHAPTER_ID = "chapter_id";
+    private static final String ARG_QUIZ = "quiz";
 
     private Long chapterId;
     private QuizFragmentBinding binding;
     // Question list
     private List<Question> questionList;
     private int questionNumber;
+    private Quiz quiz;
 
     public QuizFragment() {
         // Required empty public constructor
     }
 
-    public static QuizFragment newInstance(Long chapterId) {
+    public static QuizFragment newInstance(Long chapterId,Quiz quiz) {
         QuizFragment fragment = new QuizFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_QUESTION_NUMBER, 0);
         args.putLong(ARG_CHAPTER_ID, chapterId);
+        args.putSerializable(ARG_QUIZ, quiz);
         fragment.setArguments(args);
         //Toast to display the chapterId and questionNumber
         //Toast.makeText(fragment.getContext(), "Chapter ID: " + chapterId + " Question Number: " + questionNumber, Toast.LENGTH_SHORT).show();
@@ -78,8 +81,7 @@ public class QuizFragment extends Fragment {
         if (getArguments() != null) {
             questionNumber = getArguments().getInt(ARG_QUESTION_NUMBER);
             chapterId = getArguments().getLong(ARG_CHAPTER_ID);
-
-            fetchQuizDetails(chapterId);
+            quiz = (Quiz) getArguments().getSerializable(ARG_QUIZ);
 
         }
     }
@@ -214,43 +216,4 @@ public class QuizFragment extends Fragment {
 
     }
 
-    /*
-    private Question fetchQuestion(int questionNumber) {
-        // This is a placeholder method. Replace it with your logic to fetch questions.
-        // You might want to store questions in a list or database.
-        // Return a Question object with appropriate methods.
-        return new Question("Sample Question", "Option A", "Option B", "Option C", "Option D",1);
-    }*/
-
-    private void fetchQuizDetails(Long chapterId) {
-        ApiInterface apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
-
-        Call<Quiz> call = apiInterface.getQuizByChapter(chapterId);
-        call.enqueue(new Callback<Quiz>() {
-            @Override
-            public void onResponse(Call<Quiz> call, Response<Quiz> response) {
-                if (response.isSuccessful()) {
-
-                    Quiz currentQuiz = response.body();
-                    // Store the question list
-                    questionList = currentQuiz.getQuestions();
-
-                    // Display the first question
-                    displayQuestion(0);
-                    //Toast
-                    Toast.makeText(getContext(), "Quiz details fetched successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Handle unsuccessful response using Toast
-                    Toast.makeText(getContext(), "Failed to fetch quiz details", Toast.LENGTH_SHORT).show();
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Quiz> call, Throwable t) {
-                // Handle failure
-            }
-        });
-    }
 }
