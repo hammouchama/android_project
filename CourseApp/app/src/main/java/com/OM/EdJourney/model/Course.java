@@ -19,6 +19,42 @@ public class Course {
     @Expose
     private String image;
 
+    @SerializedName("teacher")
+    @Expose
+    private String teacher;
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public float getStars() {
+        return stars;
+    }
+
+    public void setStars(float stars) {
+        this.stars = stars;
+    }
+
+    public float getNb_chapter() {
+        return nb_chapter;
+    }
+
+    public void setNb_chapter(float nb_chapter) {
+        this.nb_chapter = nb_chapter;
+    }
+
+    @SerializedName("stars")
+    @Expose
+    private float stars;
+
+    @SerializedName("nb_chapter")
+    @Expose
+    private float nb_chapter;
+
     public String getCourseName() {
         return courseName;
     }

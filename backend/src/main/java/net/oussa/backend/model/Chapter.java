@@ -19,7 +19,7 @@ public class Chapter {
     private String chapterName;
 
     @Column(name = "video_url")
-    private String videoUrl;
+    private String videoID ;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -32,6 +32,7 @@ public class Chapter {
     //one quiz
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quiz_id")
+    @JsonIgnore
     private Quiz quiz;
 
 }

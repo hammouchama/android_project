@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
+//@NamedQuery(name = "Course.getAllCourse",query = "SELECT new net.oussa.backend.mappers.CourseDTO(co.courseId, co.courseDescription, co.courseName, co.image,co.stars,co.teacher , COUNT(c.chapterId) ) FROM Course AS co LEFT JOIN Chapter AS c ON co.courseId = c.chapterId GROUP BY co.courseId")
 @Entity
 @Table(name = "Courses")
 @Getter @Setter @Builder @ToString @AllArgsConstructor @NoArgsConstructor
@@ -22,5 +25,10 @@ public class Course {
 
 
     private String image;
+
+    private String teacher;
+
+    private float stars;
+
 
 }

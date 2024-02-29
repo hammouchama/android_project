@@ -13,9 +13,9 @@ public class Chapter {
     @Expose
     private String chapterName;
 
-    @SerializedName("videoUrl")
+    @SerializedName("videoID")
     @Expose
-    private String videoUrl;
+    private String videoID;
 
     @SerializedName("Description")
     @Expose
@@ -38,12 +38,12 @@ public class Chapter {
         this.chapterName = chapterName;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getVideoID() {
+        return videoID;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setVideoID(String videoUrl) {
+        this.videoID = videoUrl;
     }
 
     public String getDescription() {
