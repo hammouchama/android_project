@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.OM.EdJourney.ui.course.Video;
 import com.OM.EdJourney.ui.quiz.QuizActivity;
 import com.OM.EdJourney.R;
 import com.OM.EdJourney.model.Chapter;
@@ -46,7 +47,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
         holder.start_chapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, QuizActivity.class);
+                Intent intent = new Intent(context, Video.class);
                 intent.putExtra("chapterName", chapterList.get(position).getChapterName());
                 intent.putExtra("chapterId", chapterList.get(position).getChapterId());
                 intent.putExtra("contentNumber", holder.contentNumber.getText().toString());

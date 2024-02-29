@@ -31,4 +31,6 @@ public interface ApiInterface {
     @GET("quiz/getByChapter/{chapterId}")
     Call<Quiz> getQuizByChapter(@Path("chapterId")Long chapterId);
 
+    @GET("chapter/get/{id}")
+    Call<Chapter> getChapter(@Path("id") Long chapterId);
 }
