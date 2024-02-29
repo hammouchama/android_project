@@ -131,7 +131,7 @@ public class PreQuizActivity extends AppCompatActivity {
             intent.putExtra("contentNumber", contentNumber);
             intent.putExtra("courseId", courseId);
 
-            intent.putExtra("quizObj",quiz);
+            intent.putExtra("quiz",quiz);
             startActivity(intent);
         });
     }

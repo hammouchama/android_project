@@ -44,7 +44,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         holder.chapterName.setText(chapterList.get(position).getChapterName());
-        holder.contentNumber.setText(chapterList.get(position).getChapterId().toString());
+        holder.contentNumber.setText((position + 1) + "");
         holder.contentTime.setText("40 min");
 
         holder.start_chapter.setOnClickListener(new View.OnClickListener() {
