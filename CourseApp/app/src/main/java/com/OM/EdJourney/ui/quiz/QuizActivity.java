@@ -15,8 +15,8 @@ import com.OM.EdJourney.ui.quiz.QuizFragment;
 public class QuizActivity extends AppCompatActivity {
     private FrameLayout quizContainer;
     private ProgressBar progressBar;
-    private Long chapterId, courseId;
-    private String chapterName , contentNumber;
+    private Long chapterId, courseId, contentNumber;
+    private String chapterName;
     Quiz quiz;
 
     @Override
@@ -35,7 +35,7 @@ public class QuizActivity extends AppCompatActivity {
             return;
         }
         courseId = getIntent().getLongExtra("courseId", 0L);
-        contentNumber = getIntent().getStringExtra("contentNumber");
+        contentNumber = getIntent().getLongExtra("contentNumber",0L);
         chapterName = getIntent().getStringExtra("chapterName");
         quiz = (Quiz) getIntent().getSerializableExtra("quiz");
 

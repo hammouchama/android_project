@@ -59,9 +59,9 @@ public class PreQuizActivity extends AppCompatActivity {
 
 
         chapterName = getIntent().getStringExtra("chapterName");
-        contentNumber = getIntent().getLongExtra("contentNumber",1);
-        courseId = getIntent().getLongExtra("courseId", 0);
-        chapterId = getIntent().getLongExtra("chapterId", 0);
+        contentNumber = getIntent().getLongExtra("contentNumber",1L);
+        courseId = getIntent().getLongExtra("courseId", 0L);
+        chapterId = getIntent().getLongExtra("chapterId", 0L);
         courseName = getIntent().getStringExtra("courseName");
 
 

@@ -47,7 +47,7 @@ public class QuizFragment extends Fragment {
     private QuizFragmentBinding binding;
     // Question list
     private List<Question> questionList;
-    private int questionNumber;
+    private int questionNumber=0;
     private Quiz quiz;
 
     public QuizFragment() {
@@ -82,6 +82,12 @@ public class QuizFragment extends Fragment {
             questionNumber = getArguments().getInt(ARG_QUESTION_NUMBER);
             chapterId = getArguments().getLong(ARG_CHAPTER_ID);
             quiz = (Quiz) getArguments().getSerializable(ARG_QUIZ);
+            questionList = quiz.getQuestions();
+
+            displayQuestion(questionNumber);
+
+        }else{
+            Toast.makeText(getContext(), "Failed to fetch quiz details : err 4", Toast.LENGTH_SHORT).show();
 
         }
     }

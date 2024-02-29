@@ -53,7 +53,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
                 Intent intent = new Intent(context, Video.class);
                 intent.putExtra("chapterName", chapterList.get(position).getChapterName());
                 intent.putExtra("chapterId", chapterList.get(position).getChapterId());
-                intent.putExtra("contentNumber", Integer.valueOf(holder.contentNumber.getText().toString()));
+                intent.putExtra("contentNumber", Long.valueOf(position + 1));
                 intent.putExtra("courseName", courseName);
 
 

@@ -1,6 +1,8 @@
 package com.OM.EdJourney.model;
 
-public class Question {
+import java.io.Serializable;
+
+public class Question implements Serializable {
     private Long id;
     private String questionText;
     private String option1;

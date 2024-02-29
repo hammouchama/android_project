@@ -90,9 +90,9 @@ public class Video extends AppCompatActivity {
         findViewById(R.id.to_quiz).setOnClickListener(view -> {
             Intent intent1 = new Intent(Video.this, PreQuizActivity.class);
             intent1.putExtra("chapterName", intent.getStringExtra("chapterName"));
-            intent1.putExtra("chapterId", intent.getLongExtra("chapterId", 0));
-            intent1.putExtra("contentNumber", intent.getIntExtra("contentNumber", 0));
-            intent1.putExtra("courseId", intent.getLongExtra("courseId", 0));
+            intent1.putExtra("chapterId", intent.getLongExtra("chapterId", 0L));
+            intent1.putExtra("contentNumber", intent.getLongExtra("contentNumber", 0L));
+            intent1.putExtra("courseId", intent.getLongExtra("courseId", 0L));
             intent1.putExtra("courseName", intent.getStringExtra("courseName"));
 
             startActivity(intent1);
