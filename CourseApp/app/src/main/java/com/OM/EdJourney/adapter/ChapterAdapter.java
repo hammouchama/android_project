@@ -45,7 +45,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         holder.chapterName.setText(chapterList.get(position).getChapterName());
         holder.contentNumber.setText((position + 1) + "");
-        holder.contentTime.setText("40 min");
+        holder.contentTime.setText(chapterList.get(position).getEstimated_minute() +" minutes");
 
         holder.start_chapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +56,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
                 intent.putExtra("contentNumber", Long.valueOf(position + 1));
                 intent.putExtra("courseName", courseName);
 
-
-                intent.putExtra("courseId", courseId);
                 context.startActivity(intent);
             }
         });

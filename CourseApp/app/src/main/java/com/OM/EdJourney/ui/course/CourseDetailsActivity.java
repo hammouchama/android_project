@@ -22,7 +22,7 @@ import java.util.Objects;
 public class CourseDetailsActivity extends AppCompatActivity {
 
     ImageView image;
-    TextView description,title,teacher,stars;
+    TextView description,title,teacher,stars,level;
 
     Button start;
 
@@ -34,8 +34,8 @@ public class CourseDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_details);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+         Toolbar toolbar = findViewById(R.id.toolbar);
+         setSupportActionBar(toolbar);
          actionBar = getSupportActionBar();
 
         // Enable the back button
@@ -70,6 +70,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         description = findViewById(R.id.description);
         teacher=findViewById(R.id.teacher);
         stars=findViewById(R.id.stars);
+        level=findViewById(R.id.level);
 
         start = findViewById(R.id.start_course);
         Intent intent = getIntent();
@@ -79,6 +80,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         description.setText(Objects.requireNonNull(intent.getStringExtra("courseDescription")));
         teacher.setText(Objects.requireNonNull(intent.getStringExtra("teacher")));
         stars.setText(Objects.requireNonNull(intent.getStringExtra("stars")));
+        level.setText(Objects.requireNonNull(intent.getStringExtra("level")));
 
         String courseIdString = intent.getStringExtra("courseId");
         if (courseIdString != null) {

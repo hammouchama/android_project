@@ -1,56 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="176dp"
+    android:gravity="bottom"
+    android:padding="16dp"
+    android:background="@drawable/headerbkg"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <!-- Sidebar Header Background -->
     <ImageView
-        android:id="@+id/headerBackground"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sidebar_header_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="105dp"
+        android:layout_height="86dp"
+        android:layout_gravity="start"
+        android:padding="4dp"
+        android:src="@drawable/logo_full_white" />
 
-    <!-- Profile Picture -->
-    <ImageView
-        android:id="@+id/profilePicture"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/user"
-        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/headerBackground" />
-
-    <!-- Full Name -->
     <TextView
         android:id="@+id/fullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="John Doe"
-        android:textColor="@android:color/white"
-        style="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintStart_toEndOf="@id/profilePicture"
-        app:layout_constraintTop_toTopOf="@id/profilePicture" />
+        android:text="Android Knowledge"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
 
-    <!-- Email -->
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="john.doe@example.com"
-        android:textColor="@android:color/white"
+        android:text="contact@androidknowledge.com"
+        android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/fullName"
-        app:layout_constraintTop_toBottomOf="@id/fullName" />
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

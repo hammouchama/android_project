@@ -1,6 +1,7 @@
 package com.OM.EdJourney;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     CoursesAdapter categoryAdapter;
 
     ApiInterface apiInterface;
+    TextView fullName;
 
     ImageView Logout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -58,12 +62,28 @@ public class MainActivity extends AppCompatActivity {
             finish(); // Optional: Finish the current activity to prevent returning to it on back press
             return;
         }
-
         setContentView(R.layout.activity_main);
+
+        fullName=findViewById(R.id.user_name);
+        fullName.setText("Hi, "+preferences.getString("name"," "));
 
         apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
 
         categoryRecyclerView = findViewById(R.id.course_recycler);
+
+        Toolbar toolbar = findViewById(R.id.home_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        // Enable the back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_format_list_bulleted_type); // You can replace ic_arrow_back with your own drawable
+            upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+        }
 
         Call<List<Course>> call = apiInterface.getAllCourses();
 
@@ -98,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Logout = findViewById(R.id.logout);
+       /*Logout = findViewById(R.id.logout);
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,9 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 // Optional: Finish the current activity to prevent returning to it on back press
                 finish();
             }
-        });
-
-
+        });*/
         /** Side bar **/
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -129,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Handle click on hamburger icon
-        ImageView toggleMenuIcon = findViewById(R.id.toggleMenuIcon);
+        /*ImageView toggleMenuIcon = findViewById(R.id.toggleMenuIcon);
         toggleMenuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+         */
+
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
         View headerView = navigationView.getHeaderView(0);
@@ -149,8 +169,9 @@ public class MainActivity extends AppCompatActivity {
         TextView emailView = headerView.findViewById(R.id.email);
 
 
-        fullNameView.setText("name");
-        emailView.setText("email");
+        fullNameView.setText(preferences.getString("name"," "));
+        emailView.setText(preferences.getString("email"," "));
+
 
         // enable sliding the menu back and forth
 
@@ -219,4 +240,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     /** END Side bar **/
+    // Handle back button click event
+    @Override
+    public boolean onSupportNavigateUp() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            drawerLayout.openDrawer(GravityCompat.START);
+        }
+        return true;
+    }
 }

@@ -80,6 +80,7 @@ public class CourseService {
                 newCourse.setCourseName(course.getCourseName());
                 newCourse.setStars(course.getStars());
                 newCourse.setTeacher(course.getTeacher());
+                newCourse.setLevel(course.getLevel());
                 if(!image.isEmpty()){
                     newCourse.setImage(Helper.saveImage(image,serverAddress));
                 }

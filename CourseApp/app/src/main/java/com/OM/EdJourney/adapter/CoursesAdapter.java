@@ -69,6 +69,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Category
                 i.putExtra("teacher",courseList.get(position).getTeacher());
                 i.putExtra("nb_chapter",courseList.get(position).getNb_chapter());
                 i.putExtra("stars",courseList.get(position).getStars()+" ");
+                i.putExtra("level",courseList.get(position).getLevel());
                 context.startActivity(i);
 
             }

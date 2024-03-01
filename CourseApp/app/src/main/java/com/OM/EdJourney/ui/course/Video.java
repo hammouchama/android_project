@@ -1,8 +1,12 @@
 package com.OM.EdJourney.ui.course;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +25,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,16 +34,34 @@ import retrofit2.Response;
 public class Video extends AppCompatActivity {
     ApiInterface apiInterface;
     YouTubePlayerView youTubePlayerView;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         youTubePlayerView = findViewById(R.id.youtube_video);
+
+        //bar action
+        Toolbar toolbar = findViewById(R.id.toolbar_id);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+
+        // Enable the back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_left); // You can replace ic_arrow_back with your own drawable
+            upArrow.setColorFilter(getResources().getColor(R.color.lavender), PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        }
+        Intent intent = getIntent();
+        actionBar.setTitle(Objects.requireNonNull(intent.getStringExtra("chapterName")));
+
+
         // Initialize the YouTubePlayerView with a lifecycle owner
         getLifecycle().addObserver(youTubePlayerView);
         Long chapterId;
-        Intent intent = getIntent(); // Use getIntent() to get the Intent that started this activity
 
         if (intent != null && intent.hasExtra("chapterId")) {
             chapterId = intent.getLongExtra("chapterId", 0); // Provide a default value if "courseId" is not present
@@ -72,7 +95,7 @@ public class Video extends AppCompatActivity {
             public void onReady(@NotNull YouTubePlayer youTubePlayer) {
                 // Load the YouTube video by providing the video ID
 
-                youTubePlayer.loadVideo("-UlxHPIEVqA", 0);
+              //  youTubePlayer.loadVideo("-UlxHPIEVqA", 0);
                 youTubePlayerView.enableBackgroundPlayback(true);
                 youTubePlayerView.setEnableAutomaticInitialization(true);
                 youTubePlayerView.setFitsSystemWindows(true);
@@ -97,6 +120,12 @@ public class Video extends AppCompatActivity {
 
             startActivity(intent1);
         });
+    }
+    // Handle back button click event
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setVideoID(Chapter chapter) {

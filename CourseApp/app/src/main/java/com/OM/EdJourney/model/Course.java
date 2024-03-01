@@ -23,6 +23,18 @@ public class Course {
     @Expose
     private String teacher;
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    @SerializedName("level")
+    @Expose
+    private String level;
+
     public String getTeacher() {
         return teacher;
     }
