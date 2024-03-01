@@ -16,8 +16,9 @@ public class CourseDTO {
     private String teacher;
     private float stars;
     private Long nb_chapter;
+    private String level;
 
-    public CourseDTO(Long courseId, String courseDescription, String courseName, String image, float stars, String teacher, Long nb_chapter) {
+    public CourseDTO(Long courseId, String courseDescription, String courseName, String image, float stars, String teacher, Long nb_chapter,String level) {
         this.courseId = courseId;
         this.courseDescription = courseDescription;
         this.courseName = courseName;
@@ -25,6 +26,7 @@ public class CourseDTO {
         this.stars = stars;
         this.teacher = teacher;
         this.nb_chapter = nb_chapter;
+        this.level=level;
     }
     // Constructor for converting array to CourseDTO
     public CourseDTO(Object[] array) {
@@ -34,6 +36,7 @@ public class CourseDTO {
         this.image = (String) array[3];
         this.stars = (Float) array[4];
         this.teacher = (String) array[5];
-        this.nb_chapter = (Long) array[6];
+        this.nb_chapter = (Long) array[7];
+        this.level=(String) array[6];
     }
 }

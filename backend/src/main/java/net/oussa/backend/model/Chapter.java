@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Chapters")
 @Getter @Setter @Builder @ToString @AllArgsConstructor @NoArgsConstructor
@@ -35,4 +37,5 @@ public class Chapter {
     @JsonIgnore
     private Quiz quiz;
 
+    private String estimated_minute="0";
 }

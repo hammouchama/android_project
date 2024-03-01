@@ -1,10 +1,14 @@
 package com.OM.EdJourney.ui.chapter;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,6 +20,7 @@ import com.OM.EdJourney.retrofit.ApiInterface;
 import com.OM.EdJourney.retrofit.RetrofitClient;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,13 +40,32 @@ public class CourseChaptersList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_chapters_list);
         chaptersRecyclerView = findViewById(R.id.chapters_list_recycler);
+
+
+        //bar action
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        // Enable the back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_left); // You can replace ic_arrow_back with your own drawable
+            upArrow.setColorFilter(getResources().getColor(R.color.lavender), PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+            actionBar.setTitle("Chapters List");
+        }
+
+
+
+
         // get courseId passed from previous activity
         Intent intent = getIntent(); // Use getIntent() to get the Intent that started this activity
 
         if (intent != null && intent.hasExtra("courseId")) {
             courseId = intent.getLongExtra("courseId", 0); // Provide a default value if "courseId" is not present
             courseName = intent.getStringExtra("courseName");
-            Log.i("course id ", String.valueOf(courseId));
         } else {
             courseId = null;
             return; // You may want to handle this case appropriately
@@ -86,6 +110,12 @@ public class CourseChaptersList extends AppCompatActivity {
         chaptersRecyclerView.setAdapter(chapterAdapter);
         chapterAdapter.notifyDataSetChanged();
 
+    }
+    // Handle back button click event
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

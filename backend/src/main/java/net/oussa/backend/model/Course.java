@@ -30,5 +30,7 @@ public class Course {
 
     private float stars;
 
+    private String level;
+
 
 }

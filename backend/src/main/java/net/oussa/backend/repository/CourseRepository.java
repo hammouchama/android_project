@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
 
-    @Query(value = "SELECT co.course_id,co.course_name, co.course_description,  co.image, co.stars, co.teacher, COUNT(c.chapter_id) AS nb_chapter " +
+    @Query(value = "SELECT co.course_id,co.course_name, co.course_description,  co.image, co.stars, co.teacher,co.level, COUNT(c.chapter_id) AS nb_chapter " +
             "FROM courses co " +
             "LEFT JOIN chapters c ON co.course_id = c.course_id " +
             "GROUP BY co.course_id",

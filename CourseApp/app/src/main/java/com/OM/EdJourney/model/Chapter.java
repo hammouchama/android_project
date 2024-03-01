@@ -21,6 +21,17 @@ public class Chapter {
     @Expose
     private String description;
 
+    public String getEstimated_minute() {
+        return estimated_minute;
+    }
+
+    public void setEstimated_minute(String estimated_minute) {
+        this.estimated_minute = estimated_minute;
+    }
+
+    @SerializedName("estimated_minute")
+    @Expose
+    private String estimated_minute;
 
     public Long getChapterId() {
         return chapterId;
