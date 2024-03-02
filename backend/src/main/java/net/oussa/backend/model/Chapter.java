@@ -31,11 +31,5 @@ public class Chapter {
     @JsonIgnore
     private Course course;
 
-    //one quiz
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "quiz_id")
-    @JsonIgnore
-    private Quiz quiz;
-
     private String estimated_minute="0";
 }
