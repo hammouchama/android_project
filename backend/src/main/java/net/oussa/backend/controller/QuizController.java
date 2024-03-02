@@ -39,6 +39,7 @@ public class QuizController {
     @GetMapping("/getByChapter/{chapterId}")
     public ResponseEntity<?> getQuizByChapter(@PathVariable long chapterId) {
         try {
+            System.out.println(chapterId);
             return quizService.getQuizByChapter(chapterId);
         } catch (Exception e) {
             e.printStackTrace();

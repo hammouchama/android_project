@@ -10,6 +10,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.quiz.PreQuizActivity"
     android:layout_gravity="start">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:elevation="0dp"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="50sp"
+            app:titleTextColor="@color/colorDark"
+            android:theme="?attr/actionBarTheme"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            app:elevation="0dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,31 +40,8 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:clipChildren="false"
-        android:clipToPadding="false">
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:elevation="0dp"
-            >
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:minHeight="50sp"
-                app:titleTextColor="@color/colorDark"
-                android:theme="?attr/actionBarTheme"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp"
-                app:elevation="0dp"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
+        android:clipToPadding="false"
+        android:layout_marginTop="45dp">
 
         <!--<ImageView
             android:id="@+id/toggleMenuIcon"
@@ -74,7 +74,7 @@
             android:layout_marginTop="60dp"
             android:fontFamily="@font/nunito_bold"
             android:text="01"
-            android:textColor="@color/grey_200"
+            android:textColor="@color/grey_300"
             android:textSize="100sp"
             android:textFontWeight="900"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,7 @@
                 android:layout_height="48dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_format_list_bulleted_type"
-                android:background="@drawable/bg_icon"
+                android:background="@drawable/white_bg_blue_strock"
                 app:tint="@color/colorSecondaryDark" />
 
             <LinearLayout
@@ -140,7 +140,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="15"
-                    android:textColor="@color/colorSecondaryDark"
+                    android:textColor="@color/lavender"
                     android:textFontWeight="600"
                     android:textSize="22sp" />
 
@@ -149,9 +149,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_bold"
                     android:text="Uniq Choices Questions"
-                    android:textColor="@color/blue_grey_700"
+                    android:textColor="@color/blue_grey_500"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -173,7 +173,7 @@
                 android:layout_height="48dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_timer_outline"
-                android:background="@drawable/bg_icon"/>
+                android:background="@drawable/white_bg_blue_strock"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -188,7 +188,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="2 mins"
-                    android:textColor="@color/colorSecondaryDark"
+                    android:textColor="@color/lavender"
                     android:textFontWeight="600"
                     android:textSize="22sp" />
 
@@ -197,9 +197,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_bold"
                     android:text="Per Question"
-                    android:textColor="@color/blue_grey_700"
+                    android:textColor="@color/blue_grey_500"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -221,7 +221,7 @@
                 android:layout_height="48dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_medal_outline"
-                android:background="@drawable/bg_icon"/>
+                android:background="@drawable/white_bg_blue_strock"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -236,7 +236,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="90%"
-                    android:textColor="@color/colorSecondaryDark"
+                    android:textColor="@color/lavender"
                     android:textFontWeight="600"
                     android:textSize="22sp" />
 
@@ -245,9 +245,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_bold"
                     android:text="For Badge &amp; unlock next chapter"
-                    android:textColor="@color/blue_grey_700"
+                    android:textColor="@color/blue_grey_500"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -281,7 +281,7 @@
             android:text="Before you start"
             android:fontFamily="@font/nunito_bold"
             android:textFontWeight="600"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/lavender"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
@@ -304,7 +304,7 @@
                 android:layout_width="fill_parent">
                 <TextView
                     android:layout_column="1"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/grey_800"
                     android:fontFamily="@font/nunito"
                     android:textFontWeight="500"
@@ -318,7 +318,7 @@
                     android:text="@string/PreQuiz_advices_1"
                     android:textSize="18sp"
                     android:textColor="@color/grey_800"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_semibold"
                     android:layout_gravity="start"
                     android:textFontWeight="500" />
             </TableRow>
@@ -328,7 +328,7 @@
                 android:layout_width="fill_parent">
                 <TextView
                     android:layout_column="1"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/grey_800"
                     android:fontFamily="@font/nunito"
                     android:textFontWeight="500"
@@ -342,7 +342,7 @@
                     android:text="@string/PreQuiz_advices_2"
                     android:textSize="18sp"
                     android:textColor="@color/grey_800"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_semibold"
                     android:layout_gravity="start"
                     android:textFontWeight="500" />
             </TableRow>
@@ -352,7 +352,7 @@
                 android:layout_width="fill_parent">
                 <TextView
                     android:layout_column="1"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/grey_800"
                     android:fontFamily="@font/nunito"
                     android:textFontWeight="500"
@@ -366,7 +366,7 @@
                     android:text="@string/PreQuiz_advices_3"
                     android:textSize="18sp"
                     android:textColor="@color/grey_800"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_semibold"
                     android:layout_gravity="start"
                     android:textFontWeight="500" />
             </TableRow>
@@ -376,7 +376,7 @@
                 android:layout_width="fill_parent">
                 <TextView
                     android:layout_column="1"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/grey_800"
                     android:fontFamily="@font/nunito"
                     android:textFontWeight="500"
@@ -390,7 +390,7 @@
                     android:text="@string/PreQuiz_advices_4"
                     android:textSize="18sp"
                     android:textColor="@color/grey_800"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_semibold"
                     android:layout_gravity="start"
                     android:textFontWeight="500" />
             </TableRow>
@@ -400,7 +400,7 @@
                 android:layout_width="fill_parent">
                 <TextView
                     android:layout_column="1"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/grey_800"
                     android:fontFamily="@font/nunito"
                     android:textFontWeight="500"
@@ -414,7 +414,7 @@
                     android:text="@string/PreQuiz_advices_5"
                     android:textSize="18sp"
                     android:textColor="@color/grey_800"
-                    android:fontFamily="@font/nunito"
+                    android:fontFamily="@font/nunito_semibold"
                     android:layout_gravity="start"
                     android:textFontWeight="500" />
             </TableRow>

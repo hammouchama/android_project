@@ -58,8 +58,10 @@ public class QuizService {
 
     public ResponseEntity<?> getQuizByChapter(long chapterId) {
         try {
-            Quiz quiz = quizRepository.findByChapterChapterId(chapterId);
-            return ResponseEntity.ok(quiz);
+            Optional<Chapter> chapter=chapterRepository.findById(chapterId);
+            System.out.println(chapter.get());
+            Optional<Quiz> quiz = quizRepository.findQuizByChapter(chapter.get());
+          return  new ResponseEntity<>(quiz.get(),HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to retrieve quiz by chapter");

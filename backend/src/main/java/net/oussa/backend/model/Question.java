@@ -31,7 +31,7 @@ public class Question {
     private String option4;
 
     @Column(name = "correct_option")
-    private int correctOption;
+    private Integer correctOption;
 
     /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "quiz_id")
