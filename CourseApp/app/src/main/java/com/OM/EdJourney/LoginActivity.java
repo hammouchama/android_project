@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("email", userFromServer.getEmail());
                         editor.putString("username", userFromServer.getUsername());
                         editor.putString("password", userFromServer.getPassword());
+                        editor.putString("id", userFromServer.getId().toString());
                         editor.apply();
 
                         //

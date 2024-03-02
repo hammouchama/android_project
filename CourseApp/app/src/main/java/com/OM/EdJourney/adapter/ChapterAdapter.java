@@ -46,7 +46,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         holder.chapterName.setText(chapterList.get(position).getChapterName());
-        holder.contentNumber.setText((position + 1) + "");
+        holder.contentNumber.setText(getTwoDigitsNumber(position + 1));
         holder.contentTime.setText(chapterList.get(position).getEstimated_minute() +" minutes");
 
         if (completedChapterIds.contains(chapterList.get(position).getChapterId())) {
@@ -63,6 +63,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
                 intent.putExtra("chapterId", chapterList.get(position).getChapterId());
                 intent.putExtra("contentNumber", Long.valueOf(position + 1));
                 intent.putExtra("courseName", courseName);
+                intent.putExtra("courseId", courseId);
 
                 context.startActivity(intent);
             }
@@ -87,5 +88,12 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.CourseVi
             start_chapter=itemView.findViewById(R.id.start_chapter);
             medal = itemView.findViewById(R.id.medal);
         }
+    }
+
+    public String getTwoDigitsNumber(long number) {
+        if (number < 10) {
+            return "0" + number;
+        }
+        return String.valueOf(number);
     }
 }

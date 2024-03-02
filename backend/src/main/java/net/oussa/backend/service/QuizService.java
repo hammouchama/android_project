@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +18,13 @@ import java.util.Optional;
 @AllArgsConstructor
 public class QuizService {
 
-    private  QuizRepository quizRepository;
+    private QuizRepository quizRepository;
     private ChapterRepository chapterRepository;
+
     public ResponseEntity<?> addQuiz(Quiz quiz, long chapterId) {
         try {
             Optional<Chapter> chapter = chapterRepository.findById(chapterId);
-            if (chapter.isPresent()){
+            if (chapter.isPresent()) {
                 quiz.setChapter(chapter.get());
                 // add this quiz id to each question
                 List<Question> questions = quiz.getQuestions();
@@ -33,7 +35,7 @@ public class QuizService {
                 quizRepository.save(quiz);
                 return ResponseEntity.ok("Quiz added successfully");
             }
-            return  new ResponseEntity<>("Chapter not found", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Chapter not found", HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,9 +47,9 @@ public class QuizService {
         try {
             // Implement logic to retrieve a quiz by ID from the database
             Optional<Quiz> quizOptional = quizRepository.findById(id);
-            if(quizOptional.isPresent()){
+            if (quizOptional.isPresent()) {
                 return ResponseEntity.ok(quizOptional.get());
-            }else{
+            } else {
                 return ResponseEntity.status(404).body("Quiz not found");
             }
         } catch (Exception e) {
@@ -58,10 +60,20 @@ public class QuizService {
 
     public ResponseEntity<?> getQuizByChapter(long chapterId) {
         try {
-            Optional<Chapter> chapter=chapterRepository.findById(chapterId);
-            System.out.println(chapter.get());
-            Optional<Quiz> quiz = quizRepository.findQuizByChapter(chapter.get());
-          return  new ResponseEntity<>(quiz.get(),HttpStatus.OK);
+            Quiz quiz = quizRepository.findByChapterChapterId(chapterId);
+            // shuffle questions only
+            List<Question> questions = quiz.getQuestions();
+            Collections.shuffle(questions);
+
+            // get the number of questions provided for uniq quiz
+            int numberOfQuestions = quiz.getNumberOfQuestions();
+            if (numberOfQuestions < questions.size()) {
+                quiz.setQuestions(questions.subList(0, numberOfQuestions));
+            }
+
+            quiz.setQuestions(questions);
+
+            return ResponseEntity.ok(quiz);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to retrieve quiz by chapter");
@@ -113,7 +125,7 @@ public class QuizService {
 
     /**
      * Questions
-     * */
+     */
     public ResponseEntity<?> addQuestion(long quizId, Question question) {
         try {
             Optional<Quiz> quizOptional = quizRepository.findById(quizId);

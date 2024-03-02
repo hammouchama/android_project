@@ -3,7 +3,10 @@ package com.OM.EdJourney.ui.quiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +27,8 @@ public class QuizCompletionFailed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_completion_failed);
 
+
+        setStatusBarColor(R.color.colorSecondaryDark);
 
         ImageView animatedImageView = findViewById(R.id.animatedImageView);
         Glide.with(this)
@@ -81,5 +86,14 @@ public class QuizCompletionFailed extends AppCompatActivity {
 
         startActivity(intent);
         finish();
+    }
+
+
+    protected void setStatusBarColor(int colorResId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(colorResId));
+        }
     }
 }

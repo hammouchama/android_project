@@ -1,5 +1,6 @@
 package net.oussa.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,16 +19,19 @@ public class UserProgress {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    @JoinColumn(name = "user_id")
     private User user;
 
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
-    private Chapter courseId;
+    @JsonIgnore
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     @ManyToOne
-    @JoinColumn(name = "chapter_id", nullable = false)
+    @JsonIgnore
+    @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 
 

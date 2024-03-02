@@ -29,9 +29,38 @@
                 app:titleTextColor="@color/white"
                 android:textAlignment="center"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp"
-
-                />
+                tools:layout_editor_absoluteY="0dp">
+                <LinearLayout
+                    android:id="@+id/timerLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="10dp"
+                    android:background="@drawable/white_bg"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    >
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_medal_outline"
+                        android:layout_marginEnd="5dp"
+                        />
+                    <TextView
+                        android:id="@+id/chapterCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="00"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp"
+                        android:textFontWeight="800"/>
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
