@@ -2,6 +2,7 @@ package net.oussa.backend.controller;
 
 
 import lombok.AllArgsConstructor;
+import net.oussa.backend.dto.UserProgressDTO;
 import net.oussa.backend.model.UserProgress;
 import net.oussa.backend.service.UserProgressService;
 import org.springframework.http.HttpStatus;
@@ -15,15 +16,17 @@ public class UserProgressController {
 
     private final UserProgressService userProgressService;
 
+    // add user progress
     @PostMapping("/add")
-    public ResponseEntity<?> addUserProgress(@RequestBody UserProgress userProgress) {
+    public ResponseEntity<?> addUserProgress(@RequestBody UserProgressDTO userProgressDto) {
         try {
-            return userProgressService.addUserProgress(userProgress);
+            return userProgressService.addUserProgress(userProgressDto);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getUserProgress(@PathVariable long id) {
@@ -56,7 +59,7 @@ public class UserProgressController {
     }
 
     @GetMapping("/getCompletedChapters/{userId}/{courseId}")
-    public ResponseEntity<?> getCompletedChaptersByUserForCourse(@PathVariable long userId, @RequestParam long courseId) {
+    public ResponseEntity<?> getCompletedChaptersByUserForCourse(@PathVariable long userId, @PathVariable long courseId) {
         try {
             return userProgressService.getCompletedChaptersByUserForCourse(userId, courseId);
         } catch (Exception e) {
@@ -64,6 +67,18 @@ public class UserProgressController {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // get count of all chapters by userId
+    @GetMapping("/getChaptersCount/{userId}")
+    public ResponseEntity<?> getChaptersCountByUser(@PathVariable long userId) {
+        try {
+            return userProgressService.getChaptersCountByUser(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     // Add more methods as needed for updating, deleting, and other functionalities
 }

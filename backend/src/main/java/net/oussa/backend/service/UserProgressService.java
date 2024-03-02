@@ -1,10 +1,11 @@
 package net.oussa.backend.service;
 
-import net.oussa.backend.model.Chapter;
-import net.oussa.backend.model.Quiz;
-import net.oussa.backend.model.User;
-import net.oussa.backend.model.UserProgress;
+import net.oussa.backend.dto.UserProgressDTO;
+import net.oussa.backend.model.*;
+import net.oussa.backend.repository.ChapterRepository;
+import net.oussa.backend.repository.CourseRepository;
 import net.oussa.backend.repository.UserProgressRepository;
+import net.oussa.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,15 +18,35 @@ import java.util.stream.Collectors;
 public class UserProgressService {
 
     @Autowired
-    private final UserProgressRepository userProgressRepository;
+    private UserProgressRepository userProgressRepository;
+    //UserRepository
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ChapterRepository chapterRepository;
 
-    public UserProgressService(UserProgressRepository userProgressRepository) {
-        this.userProgressRepository = userProgressRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+
+
+
+
+
+    public UserProgressService() {
     }
 
-    public ResponseEntity<?> addUserProgress(UserProgress userProgress) {
+    public ResponseEntity<?> addUserProgress(UserProgressDTO userProgressDto) {
         try {
-            // Implement logic to add user progress to the database
+            System.out.println(userProgressDto);
+            UserProgress userProgress = new UserProgress();
+            User user = userRepository.findById(userProgressDto.getUserId()).get();
+            userProgress.setUser(user);
+            Course course = courseRepository.findById(userProgressDto.getCourseId()).get();
+            userProgress.setCourse(course);
+            Chapter chapter = chapterRepository.findById(userProgressDto.getChapterId()).get();
+            userProgress.setChapter(chapter);
+
+
             userProgressRepository.save(userProgress);
             return ResponseEntity.ok("User progress added successfully");
         } catch (Exception e) {
@@ -89,6 +110,22 @@ public class UserProgressService {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Failed to retrieve completed chapters by user for course");
+        }
+    }
+
+
+    // get count of all chapters by userId
+    public ResponseEntity<?> getChaptersCountByUser(long userId) {
+        try {
+            // Implement logic to retrieve count of all chapters by user ID from the database
+            List<UserProgress> userProgressList = userProgressRepository.findByUser_Id(userId);
+            long chaptersCount = userProgressList.stream()
+                    .filter(userProgress -> userProgress.getChapter() != null)
+                    .count();
+            return ResponseEntity.ok(chaptersCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Failed to retrieve count of all chapters by user");
         }
     }
 

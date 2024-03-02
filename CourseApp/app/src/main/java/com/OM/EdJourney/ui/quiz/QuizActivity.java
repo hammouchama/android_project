@@ -5,7 +5,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ public class QuizActivity extends AppCompatActivity {
 
         timerTextView = findViewById(R.id.timerTextView);
 
+        setStatusBarColor(R.color.colorSecondaryDark);
+
 
         // Retrieve chapterId from Intent
         chapterId = getIntent().getLongExtra("chapterId", 0L);
@@ -47,6 +52,7 @@ public class QuizActivity extends AppCompatActivity {
         contentNumber = getIntent().getLongExtra("contentNumber", 0L);
         chapterName = getIntent().getStringExtra("chapterName");
         quiz = (Quiz) getIntent().getSerializableExtra("quiz");
+        courseName = getIntent().getStringExtra("courseName");
 
 
         // Display the first quiz question
@@ -113,4 +119,11 @@ public class QuizActivity extends AppCompatActivity {
         finish();
     }
 
+    protected void setStatusBarColor(int colorResId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(colorResId));
+        }
+    }
 }

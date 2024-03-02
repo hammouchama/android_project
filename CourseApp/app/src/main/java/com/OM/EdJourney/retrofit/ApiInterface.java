@@ -37,10 +37,15 @@ public interface ApiInterface {
 
     //getCompletedChaptersByUserForCourse
     // getCompletedQuizzes/{userId}/{courseId}
-    @GET("api/user-progress/getCompletedChapters/{userId}/{courseId}")
+    @GET("user-progress/getCompletedChapters/{userId}/{courseId}")
     Call<List<Chapter>> getCompletedChaptersByUserForCourse(@Path("userId") Long userId, @Path("courseId") Long courseId);
 
     // addProgress and returns object with a status
-    @POST("api/user-progress/add")
+    @POST("user-progress/add")
     Call<Void> addProgress(@Body UserProgress userProgress);
+
+
+    // get count of all chapters by userId
+    @GET("user-progress/getChaptersCount/{userId}")
+    Call<Integer> getCompletedChaptersCount(@Path("userId") Long userId);
 }
