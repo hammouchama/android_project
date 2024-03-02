@@ -47,6 +47,9 @@ public class  MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private DrawerLayout drawerLayout;
+    Long userId;
+    Long chapterCount;
+    TextView chapterCountTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,9 @@ public class  MainActivity extends AppCompatActivity {
             finish(); // Optional: Finish the current activity to prevent returning to it on back press
             return;
         }
+        String tmp =  preferences.getString("id", "0");
+        userId = Long.parseLong(tmp);
+
         setContentView(R.layout.activity_main);
 
         fullName=findViewById(R.id.user_name);
@@ -70,6 +76,8 @@ public class  MainActivity extends AppCompatActivity {
         apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
 
         categoryRecyclerView = findViewById(R.id.course_recycler);
+
+        chapterCountTextView = findViewById(R.id.chapterCountTextView);
 
         Toolbar toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
@@ -96,6 +104,7 @@ public class  MainActivity extends AppCompatActivity {
                     Log.d("Debug", "Course list size: " + categoryList.size());
                     if (categoryList != null) {
                         getAllCategory(categoryList);
+                        getCompletedChaptersCount();
                     } else {
                         Toast.makeText(MainActivity.this, "Empty course list", Toast.LENGTH_SHORT).show();
                     }
@@ -231,6 +240,45 @@ public class  MainActivity extends AppCompatActivity {
 
     }
 
+    // get count of all chapters by userId
+    private void getCompletedChaptersCount() {
+        Call<Integer> call = apiInterface.getCompletedChaptersCount(userId);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful()) {
+                    Integer count = response.body();
+                    chapterCount = count.longValue();
+                    Log.d("Debug", "Completed chapters count: " + count);
+
+                    // put chapterCount in chapterCountTextView
+                    chapterCountTextView.setText(getTwoDigitsNumber(chapterCount));
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Failed to get completed chapters count", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                if (t instanceof IOException) {
+                    Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Unexpected error", Toast.LENGTH_SHORT).show();
+                }
+                // Log the error
+                Log.e("NetworkError", "Error: " + t.getMessage(), t);
+            }
+        });
+    }
+
+
+    public String getTwoDigitsNumber(long number) {
+        if (number < 10) {
+            return "0" + number;
+        }
+        return String.valueOf(number);
+    }
 
     /**
      * Side bar

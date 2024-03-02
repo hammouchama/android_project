@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,19 @@ public class QuizService {
     public ResponseEntity<?> getQuizByChapter(long chapterId) {
         try {
             Quiz quiz = quizRepository.findByChapterChapterId(chapterId);
+            // shuffle questions only
+            List<Question> questions = quiz.getQuestions();
+            Collections.shuffle(questions);
+
+            // get the number of questions provided for uniq quiz
+            int numberOfQuestions = quiz.getNumberOfQuestions();
+            if (numberOfQuestions < questions.size()) {
+                quiz.setQuestions(questions.subList(0, numberOfQuestions));
+            }
+
+
+            quiz.setQuestions(questions);
+
             return ResponseEntity.ok(quiz);
         } catch (Exception e) {
             e.printStackTrace();

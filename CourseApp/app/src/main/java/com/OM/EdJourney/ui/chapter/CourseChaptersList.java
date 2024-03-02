@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.OM.EdJourney.model.Chapter;
 import com.OM.EdJourney.retrofit.ApiInterface;
 import com.OM.EdJourney.retrofit.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +68,7 @@ public class CourseChaptersList extends AppCompatActivity {
         Intent intent = getIntent(); // Use getIntent() to get the Intent that started this activity
 
         if (intent != null && intent.hasExtra("courseId")) {
-            courseId = intent.getLongExtra("courseId", 0); // Provide a default value if "courseId" is not present
+            courseId = intent.getLongExtra("courseId", 0L); // Provide a default value if "courseId" is not present
             courseName = intent.getStringExtra("courseName");
         } else {
             courseId = null;
@@ -82,9 +84,14 @@ public class CourseChaptersList extends AppCompatActivity {
             public void onResponse(Call<List<Chapter>> call, Response<List<Chapter>> response) {
                 List<Chapter> chapterList = response.body();
 
-                // get completed chapters
 
-                Call<List<Chapter>> callUserProgress = apiInterface.getCompletedChaptersByUserForCourse(1L, courseId);
+
+                SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+
+                String tmp =  preferences.getString("id", "0");
+                Long userId = Long.parseLong(tmp);
+
+                Call<List<Chapter>> callUserProgress = apiInterface.getCompletedChaptersByUserForCourse(userId, courseId);
                 callUserProgress.enqueue(new Callback<List<Chapter>>() {
                     @Override
                     public void onResponse(Call<List<Chapter>> call, Response<List<Chapter>> response) {
@@ -94,7 +101,7 @@ public class CourseChaptersList extends AppCompatActivity {
                         Log.d("Completed Chapters", "onResponse: "+completedChapterList);
 
 
-                        List<Long> completedChapterIds = Collections.emptyList();
+                        List<Long> completedChapterIds = new ArrayList<>();
 
                         if(completedChapterList!= null) {
                             for (Chapter chapter: completedChapterList) {
