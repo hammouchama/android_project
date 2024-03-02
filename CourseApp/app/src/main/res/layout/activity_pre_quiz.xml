@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:clipChildren="false"
         android:clipToPadding="false">
         <com.google.android.material.appbar.AppBarLayout
@@ -24,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:elevation="0dp"
             >
 
             <androidx.appcompat.widget.Toolbar
@@ -35,7 +37,8 @@
                 app:titleTextColor="@color/colorDark"
                 android:theme="?attr/actionBarTheme"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                tools:layout_editor_absoluteY="0dp"
+                app:elevation="0dp"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -98,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="Chapter 1: Introduction to Java"
+            android:text="Introduction to Java"
             android:textColor="@color/blue_grey_700"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/course_name"
@@ -121,7 +124,8 @@
                 android:layout_height="48dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_format_list_bulleted_type"
-                android:background="@drawable/bg_icon"/>
+                android:background="@drawable/bg_icon"
+                app:tint="@color/colorSecondaryDark" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -262,6 +266,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
+            android:background="@color/grey_50"
             app:layout_constraintBottom_toTopOf="@+id/footer_layout"
             app:layout_constraintTop_toBottomOf="@+id/line"
             android:gravity="center_vertical"

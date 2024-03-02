@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.OM.EdJourney.R;
 import com.OM.EdJourney.databinding.QuizActivityBinding;
 import com.OM.EdJourney.databinding.QuizFragmentBinding;
 import com.OM.EdJourney.model.Question;
@@ -48,7 +50,13 @@ public class QuizFragment extends Fragment {
     // Question list
     private List<Question> questionList;
     private int questionNumber=0;
+    private int selectedOption = 0; //0 for none
     private Quiz quiz;
+    private int score = 0;
+    private int correctAnswer;
+    private CountDownTimer countDownTimer;
+
+    private QuizActivity quizActivity;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -65,6 +73,10 @@ public class QuizFragment extends Fragment {
         //Toast.makeText(fragment.getContext(), "Chapter ID: " + chapterId + " Question Number: " + questionNumber, Toast.LENGTH_SHORT).show();
 
         return fragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -84,7 +96,30 @@ public class QuizFragment extends Fragment {
             quiz = (Quiz) getArguments().getSerializable(ARG_QUIZ);
             questionList = quiz.getQuestions();
 
+            quizActivity = (QuizActivity) getActivity();
+
+
+            // get the time
+            int timePerQuestion = quiz.getTimePerQuestion();
+            countDownTimer = new CountDownTimer(timePerQuestion* 1000L, 1000) {
+                // Executes on each tick (every second in this case)
+                public void onTick(long millisUntilFinished) {
+                    // Update your UI to display the remaining time
+                    quizActivity.updateTimerUI(millisUntilFinished);
+                }
+
+                // Executes when the timer finishes
+                public void onFinish() {
+                    // Handle what happens when the timer finishes
+                    handleTimerFinish();
+                }
+            };
+
+            // set the numberOfQuestions
+            binding.numberOfQuestions.setText(getTwoDigitsNumber(questionList.size()));
+
             displayQuestion(questionNumber);
+
 
         }else{
             Toast.makeText(getContext(), "Failed to fetch quiz details : err 4", Toast.LENGTH_SHORT).show();
@@ -92,12 +127,26 @@ public class QuizFragment extends Fragment {
         }
     }
 
+    private void handleTimerFinish() {
+        // Handle what happens when the timer finishes
+        // For example, mark the question as not answered
+        Toast.makeText(getContext(), "Time's up! Try again.", Toast.LENGTH_SHORT).show();
+
+        handleUserSelection();
+
+    }
     private void displayQuestion(int questionNumber) {
         // TODO: Fetch the question and options based on the questionNumber
         // For simplicity, let's assume you have a Question class with appropriate methods.
 
         //Question question = fetchQuestion(questionNumber);
         Question question = questionList.get(questionNumber);
+
+        // set questionNumber textview
+        binding.questionNumber.setText(getTwoDigitsNumber(questionNumber + 1));
+
+        // set progress
+        binding.progressBar.setProgress((questionNumber + 1) * 100 / questionList.size());
 
         // Set question text
         binding.questionTextView.setText(question.getQuestionText());
@@ -118,21 +167,32 @@ public class QuizFragment extends Fragment {
         if(question.getOption4()!=null)
             options[j++]=question.getOption4();
 
+
+        binding.optionA.setVisibility(View.VISIBLE);
         // loop on the number of other inexistant option to delete it from showing up
+        for(int z=0;z<j;z++){
+            if(z==0)
+                binding.optionA.setVisibility(View.VISIBLE);
+            else if(z==1)
+                binding.optionB.setVisibility(View.VISIBLE);
+            else if(z==2)
+                binding.optionC.setVisibility(View.VISIBLE);
+            else if(z==3)
+                binding.optionD.setVisibility(View.VISIBLE);
+        }
         for(int z=j;z<4;z++){
             if(z==0)
-                binding.optionATextView.setVisibility(View.GONE);
+                binding.optionA.setVisibility(View.GONE);
             else if(z==1)
-                binding.optionBTextView.setVisibility(View.GONE);
+                binding.optionB.setVisibility(View.GONE);
             else if(z==2)
-                binding.optionCTextView.setVisibility(View.GONE);
+                binding.optionC.setVisibility(View.GONE);
             else if(z==3)
-                binding.optionDTextView.setVisibility(View.GONE);
+                binding.optionD.setVisibility(View.GONE);
         }
 
 
         // shuffle the array but keep track on the correct answer
-        int correctAnswer = question.getCorrectOption()-1;
         int[] positions = randomPositionArray(j);
         for (int i = 0; i < options.length; i++) {
             if (i == 0) {
@@ -145,43 +205,84 @@ public class QuizFragment extends Fragment {
                 binding.optionDTextView.setText(options[positions[i]]);
             }
         }
+        // create an array with the options positions after shuffling
+        String[] optionsPositions = new String[4];
+        for (int i = 0; i < options.length; i++) {
+            if (i == 0) {
+                optionsPositions[i] = options[positions[i]];
+            } else if (i == 1) {
+                optionsPositions[i] = options[positions[i]];
+            } else if (i == 2) {
+                optionsPositions[i] = options[positions[i]];
+            } else if (i == 3) {
+                optionsPositions[i] = options[positions[i]];
+            }
+        }
+
+
+        correctAnswer = question.getCorrectOption();
+        // To keep track on the correct answer after shuffling the array
+        // get the index where is correctAnswer in positions
+        for (int i = 0; i < options.length; i++) {
+            if (positions[i] == correctAnswer - 1) {
+                correctAnswer = i + 1;
+                break;
+            }
+        }
 
 
         // Implement logic to handle user selection and proceed to the next question
         // For example, you can add click listeners to the option views.
 
-        binding.optionATextView.setOnClickListener(new View.OnClickListener() {
+        binding.optionA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleUserSelection(positions[0], questionNumber, questionList, correctAnswer);
+                selectedOption= 1;
+                toggleOption(selectedOption);
             }
         });
 
-        binding.optionBTextView.setOnClickListener(new View.OnClickListener() {
+        binding.optionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleUserSelection(positions[1], questionNumber, questionList, correctAnswer);
+                selectedOption= 2;
+                toggleOption(selectedOption);
             }
         });
 
-        binding.optionCTextView.setOnClickListener(new View.OnClickListener() {
+        binding.optionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleUserSelection(positions[2], questionNumber, questionList, correctAnswer);
+                selectedOption= 3;
+                toggleOption(selectedOption);
             }
         });
 
-        binding.optionDTextView.setOnClickListener(new View.OnClickListener() {
+        binding.optionD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleUserSelection(positions[3], questionNumber, questionList, correctAnswer);
+                selectedOption= 4;
+                toggleOption(selectedOption);
+            }
+        });
+
+        // next_question clicklistener
+        binding.nextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedOption==0){
+                    Toast.makeText(getContext(), "Please select an option", Toast.LENGTH_SHORT).show();
+                }else{
+                    handleUserSelection();
+                }
             }
         });
 
 
+        countDownTimer.start(); // Start the timer
     }
 
-    private void handleUserSelection(int selectedOption, int questionNumber, List<Question> questionList, int correctAnswer) {
+    private void handleUserSelection() {
         // Implement logic to handle user selection and proceed to the next question
         // For example, you can add click listeners to the option views.
         // If the selected option is correct, display a message and proceed to the next question.
@@ -190,21 +291,61 @@ public class QuizFragment extends Fragment {
         Log.i("selectedOption", selectedOption + "");
         Log.i("correctAnswer", correctAnswer + "");
 
+
         if (selectedOption == correctAnswer) {
             Toast.makeText(getContext(), "Correct!", Toast.LENGTH_SHORT).show();
-            // Proceed to the next question
-            if (questionNumber < questionList.size() - 1) {
-                displayQuestion(questionNumber + 1);
-                this.questionNumber++;
-            } else {
-                // Quiz complete
-                Toast.makeText(getContext(), "Quiz complete", Toast.LENGTH_SHORT).show();
-                questionNumber= 0;
-            }
+            score++;
         } else {
             Toast.makeText(getContext(), "Incorrect. Try again!", Toast.LENGTH_SHORT).show();
         }
+
+
+        if (questionNumber < questionList.size() - 1) {
+            displayQuestion(questionNumber + 1);
+            selectedOption=0; // reset the selected option
+            toggleOption(selectedOption); // reset the options
+            questionNumber++;
+        } else {
+            // Quiz complete
+            Toast.makeText(getContext(), "Quiz complete", Toast.LENGTH_SHORT).show();
+            questionNumber= 0;
+            quizActivity.completeQuiz(score, questionList.size());
+            // finish this fragment we cant go back to it
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        countDownTimer.cancel(); // Stop the timer to avoid leaks
+    }
+
+    // toggle option function by changing the option*_radio image source to ic_radiobox_blank or ic_radiobox_marked
+    private void toggleOption(int selectedOption){
+
+        binding.optionARadio.setImageResource(R.drawable.ic_radiobox_blank);
+        binding.optionBRadio.setImageResource(R.drawable.ic_radiobox_blank);
+        binding.optionCRadio.setImageResource(R.drawable.ic_radiobox_blank);
+        binding.optionDRadio.setImageResource(R.drawable.ic_radiobox_blank);
+        if(selectedOption==1){
+            binding.optionARadio.setImageResource(R.drawable.ic_radiobox_marked);
+        }else if(selectedOption==2){
+            binding.optionBRadio.setImageResource(R.drawable.ic_radiobox_marked);
+        }else if(selectedOption==3){
+            binding.optionCRadio.setImageResource(R.drawable.ic_radiobox_marked);
+        }else if(selectedOption==4){
+            binding.optionDRadio.setImageResource(R.drawable.ic_radiobox_marked);
+        }
+    }
+    public String getTwoDigitsNumber(long number){
+        if(number<10){
+            return "0"+number;
+        }
+        return String.valueOf(number);
+    }
+
+
+
 
     private int[] randomPositionArray(int length) {
         int[] positions = new int[length];

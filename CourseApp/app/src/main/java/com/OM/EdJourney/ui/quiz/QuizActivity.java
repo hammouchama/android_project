@@ -1,23 +1,30 @@
 package com.OM.EdJourney.ui.quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.OM.EdJourney.R;
 import com.OM.EdJourney.model.Quiz;
-import com.OM.EdJourney.ui.quiz.QuizFragment;
+import com.OM.EdJourney.ui.chapter.CourseChaptersList;
 
 public class QuizActivity extends AppCompatActivity {
     private FrameLayout quizContainer;
-    private ProgressBar progressBar;
     private Long chapterId, courseId, contentNumber;
-    private String chapterName;
+    private String chapterName, courseName = "None";
     Quiz quiz;
+    TextView timerTextView;
+
+    FragmentManager fragmentManager;
+
+    FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,34 +32,85 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.quiz_activity);
 
         quizContainer = findViewById(R.id.quizContainer);
-        progressBar = findViewById(R.id.progressBar);
+
+        timerTextView = findViewById(R.id.timerTextView);
+
 
         // Retrieve chapterId from Intent
         chapterId = getIntent().getLongExtra("chapterId", 0L);
-        if(chapterId == 0L) {
+        if (chapterId == 0L) {
             // If chapterId is not provided, return
             Toast.makeText(this, "Chapter ID not provided", Toast.LENGTH_SHORT).show();
             return;
         }
         courseId = getIntent().getLongExtra("courseId", 0L);
-        contentNumber = getIntent().getLongExtra("contentNumber",0L);
+        contentNumber = getIntent().getLongExtra("contentNumber", 0L);
         chapterName = getIntent().getStringExtra("chapterName");
         quiz = (Quiz) getIntent().getSerializableExtra("quiz");
 
 
         // Display the first quiz question
+
+
+
+
+        //completeQuiz(5, 10);
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
         showQuizFragment(chapterId, quiz);
     }
 
     private void showQuizFragment(Long chapterId, Quiz quiz) {
         QuizFragment quizFragment = QuizFragment.newInstance(chapterId, quiz);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.quizContainer, quizFragment);
         transaction.addToBackStack(null);
         transaction.commit();
 
-        // Update progress
-        progressBar.setProgress(0);
     }
+
+    public String getTwoDigitsNumber(long number) {
+        if (number < 10) {
+            return "0" + number;
+        }
+        return String.valueOf(number);
+    }
+
+    public void updateTimerUI(long millisUntilFinished) {
+        // Update your UI to display the remaining time
+        timerTextView.setText(String.valueOf(getTwoDigitsNumber(millisUntilFinished / 1000)));
+    }
+
+    // function when complete the quiz
+    public void completeQuiz(int numberOfCorrectAnswers, int numberOfQuestions) {
+        // make the timer invisible
+        LinearLayout timerLayout = findViewById(R.id.timerLayout);
+        timerLayout.setVisibility(TextView.INVISIBLE);
+
+        int scorePercentage = (numberOfCorrectAnswers * 100) / numberOfQuestions;
+        int requiredScore = quiz.getRequiredScore();
+
+
+        // Display the quiz completion activity depending on the score if higher or equal than requiredScore or not
+        Intent intent;
+        if (scorePercentage >= requiredScore) {
+            // Display the quiz completion passed activity
+            intent = new Intent(QuizActivity.this, QuizCompletionPassed.class);
+        } else {
+            // Display the quiz completion failed activity
+            intent = new Intent(QuizActivity.this, QuizCompletionFailed.class);
+        }
+        intent.putExtra("scorePercentage", scorePercentage);
+        intent.putExtra("requiredScore", requiredScore);
+
+        intent.putExtra("chapterId", chapterId);
+        intent.putExtra("courseId", courseId);
+        intent.putExtra("contentNumber", contentNumber);
+        intent.putExtra("chapterName", chapterName);
+        intent.putExtra("courseName", courseName);
+        intent.putExtra("quiz", quiz);
+        startActivity(intent);
+        finish();
+    }
+
 }
