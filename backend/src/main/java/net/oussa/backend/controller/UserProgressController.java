@@ -55,10 +55,10 @@ public class UserProgressController {
         }
     }
 
-    @GetMapping("/getCompletedQuizzes/{userId}")
-    public ResponseEntity<?> getCompletedQuizzesByUser(@PathVariable long userId) {
+    @GetMapping("/getCompletedChapters/{userId}/{courseId}")
+    public ResponseEntity<?> getCompletedChaptersByUserForCourse(@PathVariable long userId, @RequestParam long courseId) {
         try {
-            return userProgressService.getCompletedQuizzesByUser(userId);
+            return userProgressService.getCompletedChaptersByUserForCourse(userId, courseId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -19,6 +19,8 @@ import com.OM.EdJourney.model.Chapter;
 import com.OM.EdJourney.retrofit.ApiInterface;
 import com.OM.EdJourney.retrofit.RetrofitClient;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -79,8 +81,37 @@ public class CourseChaptersList extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Chapter>> call, Response<List<Chapter>> response) {
                 List<Chapter> chapterList = response.body();
-                // Assuming you want a vertical list, use LinearLayoutManager
-                getAllCategory(chapterList,courseId);
+
+                // get completed chapters
+
+                Call<List<Chapter>> callUserProgress = apiInterface.getCompletedChaptersByUserForCourse(1L, courseId);
+                callUserProgress.enqueue(new Callback<List<Chapter>>() {
+                    @Override
+                    public void onResponse(Call<List<Chapter>> call, Response<List<Chapter>> response) {
+                        List<Chapter> completedChapterList = response.body();
+                        // Assuming you want a vertical list, use LinearLayoutManager
+                        /*getAllCategory(chapterListCompleted,courseId);*/
+                        Log.d("Completed Chapters", "onResponse: "+completedChapterList);
+
+
+                        List<Long> completedChapterIds = Collections.emptyList();
+
+                        if(completedChapterList!= null) {
+                            for (Chapter chapter: completedChapterList) {
+                                completedChapterIds.add(chapter.getChapterId());
+                            }
+                        }
+
+
+
+                        getAllCategory(chapterList,courseId,completedChapterIds);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Chapter>> call, Throwable t) {
+                        Toast.makeText(CourseChaptersList.this, "Failed to fetch chapters", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -89,24 +120,25 @@ public class CourseChaptersList extends AppCompatActivity {
             }
         });
 
-        /*// add onclick listner on the id imageView10
-        ImageView imageView10 = findViewById(R.id.imageView10);
-        Long chapterId = 1L;
-        imageView10.setOnClickListener(v -> {
-            Intent intent1 = new Intent(this, QuizActivity.class);
-            intent1.putExtra("CHAPTER_ID", chapterId);
-            startActivity(intent1);
-        });*/
+
+
 
 
 
 
     }
-    private void getAllCategory(List<Chapter> chapterList, Long courseId) {
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        // Handle the new intent, update UI, or perform actions
+    }
+
+    private void getAllCategory(List<Chapter> chapterList, Long courseId, List<Long> completedChapterIds) {
 
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, 1);
         chaptersRecyclerView.setLayoutManager(layoutManager);
-        chapterAdapter = new ChapterAdapter(this, chapterList,courseId,courseName);
+        chapterAdapter = new ChapterAdapter(this, chapterList,courseId,courseName,completedChapterIds);
         chaptersRecyclerView.setAdapter(chapterAdapter);
         chapterAdapter.notifyDataSetChanged();
 

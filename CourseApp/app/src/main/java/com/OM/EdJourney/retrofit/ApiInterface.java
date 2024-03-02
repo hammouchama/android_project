@@ -5,6 +5,7 @@ import com.OM.EdJourney.model.Course;
 import com.OM.EdJourney.model.Question;
 import com.OM.EdJourney.model.Quiz;
 import com.OM.EdJourney.model.User;
+import com.OM.EdJourney.model.UserProgress;
 
 import java.util.List;
 
@@ -33,4 +34,13 @@ public interface ApiInterface {
 
     @GET("chapter/get/{id}")
     Call<Chapter> getChapter(@Path("id") Long chapterId);
+
+    //getCompletedChaptersByUserForCourse
+    // getCompletedQuizzes/{userId}/{courseId}
+    @GET("api/user-progress/getCompletedChapters/{userId}/{courseId}")
+    Call<List<Chapter>> getCompletedChaptersByUserForCourse(@Path("userId") Long userId, @Path("courseId") Long courseId);
+
+    // addProgress and returns object with a status
+    @POST("api/user-progress/add")
+    Call<Void> addProgress(@Body UserProgress userProgress);
 }

@@ -74,6 +74,10 @@ public class QuizFragment extends Fragment {
 
         return fragment;
     }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,7 +147,6 @@ public class QuizFragment extends Fragment {
 
         // set progress
         binding.progressBar.setProgress((questionNumber + 1) * 100 / questionList.size());
-        countDownTimer.start();
 
         // Set question text
         binding.questionTextView.setText(question.getQuestionText());
@@ -190,7 +193,6 @@ public class QuizFragment extends Fragment {
 
 
         // shuffle the array but keep track on the correct answer
-        correctAnswer = question.getCorrectOption()-1;
         int[] positions = randomPositionArray(j);
         for (int i = 0; i < options.length; i++) {
             if (i == 0) {
@@ -201,6 +203,30 @@ public class QuizFragment extends Fragment {
                 binding.optionCTextView.setText(options[positions[i]]);
             } else if (i == 3) {
                 binding.optionDTextView.setText(options[positions[i]]);
+            }
+        }
+        // create an array with the options positions after shuffling
+        String[] optionsPositions = new String[4];
+        for (int i = 0; i < options.length; i++) {
+            if (i == 0) {
+                optionsPositions[i] = options[positions[i]];
+            } else if (i == 1) {
+                optionsPositions[i] = options[positions[i]];
+            } else if (i == 2) {
+                optionsPositions[i] = options[positions[i]];
+            } else if (i == 3) {
+                optionsPositions[i] = options[positions[i]];
+            }
+        }
+
+
+        correctAnswer = question.getCorrectOption();
+        // To keep track on the correct answer after shuffling the array
+        // get the index where is correctAnswer in positions
+        for (int i = 0; i < options.length; i++) {
+            if (positions[i] == correctAnswer - 1) {
+                correctAnswer = i + 1;
+                break;
             }
         }
 
@@ -253,6 +279,7 @@ public class QuizFragment extends Fragment {
         });
 
 
+        countDownTimer.start(); // Start the timer
     }
 
     private void handleUserSelection() {
@@ -282,7 +309,9 @@ public class QuizFragment extends Fragment {
             // Quiz complete
             Toast.makeText(getContext(), "Quiz complete", Toast.LENGTH_SHORT).show();
             questionNumber= 0;
-            quizActivity.completeQuiz();
+            quizActivity.completeQuiz(score, questionList.size());
+            // finish this fragment we cant go back to it
+            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
     @Override

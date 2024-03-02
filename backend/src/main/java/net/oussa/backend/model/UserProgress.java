@@ -21,15 +21,14 @@ public class UserProgress {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    private Chapter courseId;
+
     @ManyToOne
     @JoinColumn(name = "chapter_id", nullable = false)
     private Chapter chapter;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
-
-    @Column(name = "is_completed")
-    private Boolean isCompleted;
 
 }
